@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questionnaire_question', function (Blueprint $table) {
+        Schema::create('deceased', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('zipcode');
+            $table->string('city');
+            $table->string('adress');
+            $table->date('date_of_birth');
+            $table->date('date_of_death');
             $table->timestamps();
-            $table->foreignId('question_id')->references('id')->on('questions');
-            $table->foreignId('questionnaires_id')->references('id')->on('questionnaires');
-            $table->foreignId('deceased_id')->references('id')->on('deceased');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questionList_question');
+        //
     }
 };
