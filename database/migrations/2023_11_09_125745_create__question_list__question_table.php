@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questionList_question', function (Blueprint $table) {
+        Schema::create('questionnaire_question', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('question_id')->references('id')->on('questions');
-            $table->foreignId('questionsList_id')->references('id')->on('questions_list');
+            $table->foreignId('questionnaires_id')->references('id')->on('questionnaires');
             $table->foreignId('deceased_id')->references('id')->on('deceased');
         });
     }
