@@ -16,7 +16,6 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('question_id')->references('id')->on('questions');
             $table->foreignId('questionnaires_id')->references('id')->on('questionnaires');
-            $table->foreignId('deceased_id')->references('id')->on('deceased');
         });
     }
 

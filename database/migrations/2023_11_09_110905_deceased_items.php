@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('adress');
             $table->date('date_of_birth');
             $table->date('date_of_death');
+            $table->string('img');
             $table->timestamps();
         });
     }
