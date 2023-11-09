@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('_question_list__question', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('Question_id')->references('id')->on('Question');
-            $table->foreignId('QuestionList_id')->references('id')->on('QuestionList');
+            $table->foreignId('question_id')->references('id')->on('questions');
+            $table->foreignId('questionsList_id')->references('id')->on('questions_list');
+            $table->foreignId('deceased_id')->references('id')->on('deceased');
         });
     }
 
