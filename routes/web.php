@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionnaireController;
@@ -31,5 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('questionnaire', QuestionnaireController::class);
-Route::resource('/questions', QuestionController::class);
+Route::resource('/questionnaire/questions', QuestionController::class);
+Route::resource('/questionnaire/deceased', DeceasedController::class);
+
+
 require __DIR__.'/auth.php';
