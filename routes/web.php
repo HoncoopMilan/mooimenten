@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionnaireController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('questionnaire', QuestionnaireController::class);
-
+Route::resource('/questions', QuestionController::class);
 require __DIR__.'/auth.php';
