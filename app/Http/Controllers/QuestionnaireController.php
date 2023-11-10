@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 
 class QuestionnaireController extends Controller
@@ -11,7 +12,8 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        //
+        $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
+        return view('questionnaire.index', compact('questionnaires'));
     }
 
     /**
