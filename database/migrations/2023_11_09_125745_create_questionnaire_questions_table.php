@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questionnaire_question', function (Blueprint $table) {
+        Schema::create('questionnaire_questions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('question_id')->references('id')->on('questions');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questionnaire_question');
+        Schema::dropIfExists('questionnaire_questions');
     }
 };
