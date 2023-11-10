@@ -15,6 +15,7 @@ class QuestionnaireSeeder extends Seeder
     {
         Questionnaire::create([
             'name' => 'Vragenlijst 1',
+            'completed_times' => 2,
             'deceased_id' => 1
         ]);
     }

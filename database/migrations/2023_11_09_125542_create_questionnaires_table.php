@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('completed_times');
             $table->foreignId('deceased_id')->references('id')->on('deceaseds');
             $table->timestamps();
         });
