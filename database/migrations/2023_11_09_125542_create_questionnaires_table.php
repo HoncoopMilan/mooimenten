@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('completed_times');
-            $table->foreignId('deceased_id')->references('id')->on('deceaseds');
+            $table->foreignId('deceased_id')->references('id')->on('deceaseds')->nullable();
             $table->timestamps();
         });
     }
