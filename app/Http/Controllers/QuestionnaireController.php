@@ -17,6 +17,14 @@ class QuestionnaireController extends Controller
     }
 
     /**
+     * Deceased step from the form.
+     */
+    public function deceased()
+    {
+        return 'test';
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -29,7 +37,16 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3',
+        ]);
+
+        Questionnaire::create([
+            'name' => $request->name,
+            'deceased_id' => null,
+        ]);
+
+        return redirect()->route('deceased.index');
     }
 
     /**

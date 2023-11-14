@@ -32,8 +32,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('questionnaire', QuestionnaireController::class);
-Route::resource('/questionnaire/questions', QuestionController::class);
-Route::resource('/questionnaire/deceased', DeceasedController::class);
+Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
+Route::resource('questions', QuestionController::class);
+Route::resource('deceased', DeceasedController::class);
 
 
 require __DIR__.'/auth.php';
