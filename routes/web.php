@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::class, 'index']);
+
 Route::resource('questionnaire', QuestionnaireController::class);
 Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
 Route::resource('questions', QuestionController::class);
