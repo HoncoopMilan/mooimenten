@@ -4,6 +4,12 @@
         <input type="text" name="name" id="">
         <button type="submit">Submit</button> 
     </form>
+    @if (\Session::has('error'))
+        <p style="color: red">{!! \Session::get('error') !!}</p>
+    @elseif(\Session::has('succes'))
+    <p style="color: green">{!! \Session::get('succes') !!}</p>
+
+    @endif
     <table>
         <tr>
             <th>Naam</th>

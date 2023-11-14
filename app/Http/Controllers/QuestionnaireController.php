@@ -37,6 +37,10 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
+        if(Questionnaire::where('name', $request->name)->exists()){
+            return redirect()->back()->with('error', 'De naam bestaat al');   
+        }
+
         $request->validate([
             'name' => 'required|min:3',
         ]);
@@ -46,7 +50,8 @@ class QuestionnaireController extends Controller
             'deceased_id' => null,
         ]);
 
-        return redirect()->route('deceased.index');
+        return redirect()->route('questionnaire.index')->with('succes', 'De vragenlijst is succesvol aangemaakt');   
+
     }
 
     /**
