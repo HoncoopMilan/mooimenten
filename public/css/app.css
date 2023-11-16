@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 /* header */
-
 header{
     background-color: #D1DCD1;
     margin: 0 auto;
@@ -19,4 +18,40 @@ header{
 
 .header_logo{
     width: 200px;
+}
+
+
+/* questions/index */
+.overledene-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.overledene{
+    border: 3px solid #6C7C79;
+    border-radius: 8px;
+    
+    width: 300px;
+    display: flex;
+    align-items: center;
+}
+.overledene-txt{
+    margin-left: 20px;
+}
+.geboorte{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+}
+.dood{
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+p{
+    margin: 0px;
+}
+h1{
+    margin: 0px;
+    
 }
