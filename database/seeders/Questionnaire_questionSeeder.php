@@ -13,13 +13,11 @@ class Questionnaire_questionSeeder extends Seeder
      */
     public function run(): void
     {
-        questionnaire_question::create([
-            'questionnaires_id' => 1,
-            'question_id' => 1,
-        ]);
-        questionnaire_question::create([
-            'questionnaires_id' => 1,
-            'question_id' => 2,
-        ]);
+        for ($i = 1; $i <= 15; $i++) {
+            questionnaire_question::create([
+                'questionnaires_id' => 1,
+                'question_id' => $i,
+            ]);
+        }
     }
 }
