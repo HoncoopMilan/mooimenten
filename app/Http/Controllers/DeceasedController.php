@@ -69,7 +69,7 @@ class DeceasedController extends Controller
         $questionnaire->save();
 
         $questionnaireName = $questionnaire->name;
-        return redirect()->route('deceased.questionnaire', compact('questionnaireName'));   
+        return redirect()->route('questions.questionnaire', compact('questionnaireName'));   
     }
 
     /**
@@ -131,7 +131,7 @@ class DeceasedController extends Controller
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
         $questionnaireName = $questionnaire->name;
 
-        return redirect()->route('deceased.questionnaire', compact('questionnaireName'));   
+        return redirect()->route('questions.questionnaire', compact('questionnaireName'));   
     }
 
     /**
