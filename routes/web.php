@@ -32,8 +32,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::class, 'index'])->name('deceased.questionnaire');
+Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');
 
 Route::resource('questionnaire', QuestionnaireController::class);
+
 Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);

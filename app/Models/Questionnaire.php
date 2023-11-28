@@ -11,8 +11,8 @@ class Questionnaire extends Model
 
     use HasFactory;
 
-    public function questionnaire_question(){
-        return $this->hasMany(questionnaire_question::class);
+    public function questions(){
+        return $this->belongsToMany(Question::class);
     }
 
     public function deceased(){

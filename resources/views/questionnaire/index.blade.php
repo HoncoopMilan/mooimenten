@@ -17,7 +17,7 @@
         </tr>
         <tr>
             @foreach ($questionnaires as $questionnaire)
-            <td>{{$questionnaire->name}}</td>
+            <td><a href="{{ route('deceased.questionnaire', $questionnaire->name) }}">{{$questionnaire->name}}</a></td>
             <td>{{$questionnaire->completed_times}}</td>
             @endforeach
         </tr>

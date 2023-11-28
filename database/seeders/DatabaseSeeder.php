@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use \App\Models\Questionnaire;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,13 @@ class DatabaseSeeder extends Seeder
             DeceasedSeeder::class,
             QuestionnaireSeeder::class,
             QuestionSeeder::class,
-            Questionnaire_questionSeeder::class,
         ]);
+
+        foreach(\App\Models\Question::all() as $question){
+            $questionnaire = Questionnaire::find(1);
+            $questionnaire->questions()->attach($question);
+        }
+
+
     }
 }
