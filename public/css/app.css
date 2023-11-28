@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+p{
+    margin: 0px;
+}
+h1{
+    margin: 0px;
+    
+}
+
 /* header */
 header{
     background-color: #D1DCD1;
@@ -22,36 +30,76 @@ header{
 
 
 /* questions/index */
-.overledene-container{
+.container{
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    
+}
+.sub-container{
+    width: 300px;
 }
 .overledene{
     border: 3px solid #6C7C79;
     border-radius: 8px;
-    
-    width: 300px;
     display: flex;
     align-items: center;
+    box-shadow: 2px 2px 5px #6C7C79;
 }
 .overledene-txt{
-    margin-left: 20px;
+    margin-left: 15px;
 }
 .geboorte{
     display: flex;
     align-items: center;
     margin-bottom: 1px;
 }
-.dood{
+.sterf-datum{
     display: flex;
     align-items: center;
     margin-bottom: 4px;
 }
-p{
-    margin: 0px;
+form{
+    margin-top: 60px;
 }
-h1{
-    margin: 0px;
-    
+.form-group{
+    margin-bottom: 20px;
 }
+
+#custom-textarea{
+    border: 3px solid #6C7C79;
+    font-size: 11px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.custom-label{
+    font-size: 15px;
+    font-weight: bold;
+}
+.label{
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: bold;
+}
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 2px solid #6C7C79;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+.submit-btn{
+    color: white;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    padding: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
