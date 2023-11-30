@@ -82,9 +82,9 @@ form{
     font-size: 15px;
     font-weight: bold;
 }
-input[type="file"] {
+/* input[type="file"] {
     display: none;
-}
+} */
 .custom-file-upload {
     border: 2px solid #6C7C79;
     cursor: pointer;
