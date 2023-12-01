@@ -78,7 +78,21 @@ class QuestionController extends Controller
      */
     public function update(Request $request, question $question)
     {
-        //
+        $questionCount = count($request->all()) - 2;
+        if($questionCount <= 0){
+            return redirect()->back()->with('error', 'Je hebt geen vragen geselecteerd'); 
+        }
+        
+        // Alle vragen verwijderen
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
+        $questionnaire->questions()->detach();
+
+        foreach($request->questions as $question){
+            $questionnaire = Questionnaire::find($request->questionnaire_id);
+            $question = Question::find($question);
+            $questionnaire->questions()->attach($question);
+        }
+
     }
 
     /**

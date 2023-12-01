@@ -50,7 +50,6 @@ class QuestionnaireController extends Controller
             'deceased_id' => null,
         ]);
 
-        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
         return redirect()->route('questionnaire.index')->with('succes', 'De vragenlijst is succesvol aangemaakt');   
 
     }
@@ -76,7 +75,7 @@ class QuestionnaireController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+    
     }
 
     /**
