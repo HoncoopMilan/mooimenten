@@ -1,4 +1,5 @@
 <x-app-layout>
+    <h1>Maak een vragenlijst aan</h1>
     <form action="{{ route('questionnaire.store') }}" method="POST" enctype="multipart/form-data">
         @csrf  
         <input type="text" name="name" id="">
