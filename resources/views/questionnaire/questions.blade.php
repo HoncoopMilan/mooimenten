@@ -1,5 +1,6 @@
 <x-app-layout>
-    <h1>Kies de vragen die je wilt zien</h1>
+    <h1>Maak uw vragenlijst</h1>
+    <p>Kies de vragen die u wenst terug te zien in de vragenlijst</p>
     @if (\Session::has('error'))
         <p style="color: red">{!! \Session::get('error') !!}</p>
     @endif
