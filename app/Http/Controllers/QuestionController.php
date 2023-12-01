@@ -93,6 +93,9 @@ class QuestionController extends Controller
             $questionnaire->questions()->attach($question);
         }
 
+        $questionnaireName = $questionnaire->name;
+        return redirect()->route('questions.questionnaire', compact('questionnaireName'));   
+
     }
 
     /**

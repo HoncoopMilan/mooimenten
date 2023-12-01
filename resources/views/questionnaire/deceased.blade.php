@@ -1,4 +1,5 @@
 <x-app-layout>
+    <h1>Informatie over de overledenen</h1>
     @if( !isset($deceased))
         <form class="formproject" action="{{ route('deceased.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -103,9 +104,9 @@
             @if(isset($deceased->img))
                 <div class="form-input-questionnaire">
                     <img style=" width: 200px;" src="{{asset('storage/' . $deceased->img)}}" alt="{{$deceased->img}}">
+                    <input type="hidden" name="img" value="{{$deceased->img}}">
                     <a href="{{ route('deceased.destroyImg', $deceased->id) }}">Verwijder foto</a>         
                 </div>
-                <input type="hidden" name="img" id="">
             @else
                 <div class="form-input-questionnaire">
                     <strong>Foto van hem:</strong>

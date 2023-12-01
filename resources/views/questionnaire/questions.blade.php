@@ -1,4 +1,5 @@
 <x-app-layout>
+    <h1>Kies de vragen die je wilt zien</h1>
     @if (\Session::has('error'))
         <p style="color: red">{!! \Session::get('error') !!}</p>
     @endif
