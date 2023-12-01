@@ -57,9 +57,10 @@ class QuestionnaireController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $questionnaireName)
     {
-        //
+        $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
+        return view('questions.index', compact('questionnaire'));
     }
 
     /**
