@@ -36,7 +36,7 @@
                             <label for="">0/3</label>
                         </div>
                         <label class="custom-file-upload">
-                            <input type="file"/>
+                            <input type="file" style="display:none"/>
                             <img src="{{asset('img/add-image.png')}}" alt="">
                         </label>
                     </div>
