@@ -35,12 +35,14 @@ Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::c
 Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');
 Route::get('/questionnaire/questions/{questionnaireName}', [QuestionController::class, 'index'])->name('questions.questionnaire');
 
-Route::resource('questionnaire', QuestionnaireController::class);
+
 
 Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
 Route::post('/question/store', [QuestionController::class, 'storeQuestion'])->name('questions.storeQuestion');
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
 
+Route::get('/questionnaire/{questionnaireName}', [QuestionnaireController::class, 'show'])->name('questionnaire.show');
+Route::resource('questionnaire', QuestionnaireController::class);
 
 require __DIR__.'/auth.php';
