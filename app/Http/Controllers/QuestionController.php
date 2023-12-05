@@ -112,7 +112,10 @@ class QuestionController extends Controller
         //
     }
 
-    public function storeQuestion(Request $request){
+        /**
+     * Create a question.
+     */
+    public function questionStore(Request $request){
         // dd($request->all());
         if(Question::where('question', $request->question)->exists()){
             return redirect()->back()->with('error', 'Deze vraag bestaat al');   
@@ -128,5 +131,22 @@ class QuestionController extends Controller
         ]);
 
         return redirect()->route('questions.questionnaire')->with('succes', 'De vraag is succesvol aangemaakt'); 
+    }
+
+    /**
+     * Show a question dashboard.
+     */
+    public function questionDashboard(){
+        $questions = Question::orderBy('id')->get(); 
+        return view('questions.index', compact('questions'));
+
+    }
+
+
+    /**
+     * Update a question.
+     */
+    public function questionUpdate(Request $request, question $question){
+        dd($request->all());
     }
 }

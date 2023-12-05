@@ -23,11 +23,5 @@
             @endforeach
         </tr>
     </table>
-    <h2>Maak een nieuwe vraag aan</h2>
-    <p>Om een vraag aan te maken zet waar de naam van de overledenen %name% neer, zodat de naam daar komt.</p>
-    <form action="{{ route('questions.storeQuestion') }}" method="POST" enctype="multipart/form-data">
-        @csrf  
-        <input type="text" name="question" id="">
-        <button type="submit">Submit</button> 
-    </form>
+    <a href="{{route('question.dashboard')}}">Vragen overzicht</a>
 </x-app-layout>

@@ -38,7 +38,9 @@ Route::get('/questionnaire/questions/{questionnaireName}', [QuestionController::
 
 
 Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
-Route::post('/question/store', [QuestionController::class, 'storeQuestion'])->name('questions.storeQuestion');
+Route::get('/question', [QuestionController::class, 'questionDashboard'])->name('question.dashboard');
+Route::post('/question/store', [QuestionController::class, 'questionStore'])->name('question.storeQuestion');
+Route::patch('/question/update', [ProfileController::class, 'questionUpdate'])->name('question.update');
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
 

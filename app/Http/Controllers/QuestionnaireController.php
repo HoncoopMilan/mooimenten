@@ -60,7 +60,7 @@ class QuestionnaireController extends Controller
     public function show(string $questionnaireName)
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
-        return view('questions.index', compact('questionnaire'));
+        return view('questionnaire.show', compact('questionnaire'));
     }
 
     /**
