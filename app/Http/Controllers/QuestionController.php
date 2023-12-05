@@ -28,9 +28,9 @@ class QuestionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -104,5 +104,23 @@ class QuestionController extends Controller
     public function destroy(question $question)
     {
         //
+    }
+
+    public function storeQuestion(Request $request){
+        // dd($request->all());
+        if(Question::where('question', $request->question)->exists()){
+            return redirect()->back()->with('error', 'Deze vraag bestaat al');   
+        }
+
+        $request->validate([
+            'question' => 'required|min:3',
+        ]);
+
+        Question::create([
+            'question' => $request->question,
+            
+        ]);
+
+        return redirect()->route('questions.questionnaire')->with('succes', 'De vraag is succesvol aangemaakt'); 
     }
 }
