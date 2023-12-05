@@ -35,9 +35,12 @@ Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::c
 Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');
 Route::get('/questionnaire/questions/{questionnaireName}', [QuestionController::class, 'index'])->name('questions.questionnaire');
 Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
+
 Route::get('/question', [QuestionController::class, 'questionDashboard'])->name('question.dashboard');
 Route::post('/question/store', [QuestionController::class, 'questionStore'])->name('question.storeQuestion');
-Route::patch('/question/update', [ProfileController::class, 'questionUpdate'])->name('question.update');
+Route::put('/question/update/{question}', [QuestionController::class, 'questionUpdate'])->name('question.update');
+Route::delete('/question/delete/{question}', [QuestionController::class, 'questionDelete'])->name('question.destroy');
+
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
 

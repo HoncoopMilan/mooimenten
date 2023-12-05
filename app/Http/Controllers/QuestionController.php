@@ -130,7 +130,7 @@ class QuestionController extends Controller
             
         ]);
 
-        return redirect()->route('questions.questionnaire')->with('succes', 'De vraag is succesvol aangemaakt'); 
+        return redirect()->route('question.dashboard');
     }
 
     /**
@@ -147,6 +147,23 @@ class QuestionController extends Controller
      * Update a question.
      */
     public function questionUpdate(Request $request, question $question){
-        dd($request->all());
+        $request->validate([
+            'question' => 'required',
+        ]);
+
+        $question->question = $request->question;
+        $question->save();
+
+        return redirect()->route('question.dashboard');
+    }
+
+    /**
+     * Delete a question.
+     */
+    public function questionDelete(question $question){
+
+        $question->delete();
+
+        return redirect()->route('question.dashboard');
     }
 }
