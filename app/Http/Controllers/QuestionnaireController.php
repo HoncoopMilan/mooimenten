@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,32 @@ class QuestionnaireController extends Controller
         return redirect()->route('questionnaire.index')->with('succes', 'De vragenlijst is succesvol aangemaakt');   
 
     }
+    /**
+     * Save the questionnaire.
+     */
+    public function storeQuestionnaire(Request $request){
+        if($request->img == null){
+            return redirect()->back()->with('imgError', 'Je moet 1 of meerdere afbeeldingen geselecteerd hebben');   
+        }
+
+        foreach($request->questions as $question){
+            if($question == null){
+                return redirect()->back()->with('questionError', 'Je hebt niet alle vragen ingevuld');   
+            }
+        }
+
+        foreach($request->img as $img){
+            $faker = \Faker\Factory::create('nl_NL');
+            $imgName = $faker->numberBetween(10000, 200000) . $img->getClientOriginalName();
+
+            Photo::create([
+                'img' => $imgName,
+                'questionnaire_id' => $request->questionnaire_id
+            ]);
+
+            $img->storeAs('public/answers', $imgName);
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -60,7 +87,8 @@ class QuestionnaireController extends Controller
     public function show(string $questionnaireName)
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
-        return view('questionnaire.show', compact('questionnaire'));
+        $photos = Photo::where('questionnaire_id', $questionnaire->id)->get();
+        return view('questionnaire.show', compact('questionnaire', 'photos'));
     }
 
     /**
