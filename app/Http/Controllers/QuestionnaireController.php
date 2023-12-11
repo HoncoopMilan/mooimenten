@@ -37,6 +37,7 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
+
         if(Questionnaire::where('name', $request->name)->exists()){
             return redirect()->back()->with('error', 'De naam bestaat al');   
         }
@@ -48,8 +49,10 @@ class QuestionnaireController extends Controller
         Questionnaire::create([
             'name' => $request->name,
             'deceased_id' => null,
+            'expire' => now()->addMinutes(65),
+            
         ]);
-
+        
         return redirect()->route('questionnaire.index')->with('succes', 'De vragenlijst is succesvol aangemaakt');   
 
     }
@@ -59,7 +62,12 @@ class QuestionnaireController extends Controller
      */
     public function show(string $questionnaireName)
     {
-        $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
+        $questionnaire = Questionnaire::where('name', $questionnaireName)->where('expire', '>', now()->addHours(1))->get()->first();
+
+        if ($questionnaire == null) {
+            return view('404'); 
+        }
+
         return view('questionnaire.show', compact('questionnaire'));
     }
 

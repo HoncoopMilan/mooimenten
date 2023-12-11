@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('completed_times')->default(0);
             $table->unsignedBigInteger('deceased_id')->nullable();
             $table->foreign('deceased_id')->references('id')->on('deceaseds');
+            $table->timestamp('expire');
             $table->timestamps();
         });
     }

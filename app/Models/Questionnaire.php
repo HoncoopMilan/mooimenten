@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Questionnaire extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'expire'];
 
     use HasFactory;
 
@@ -18,4 +18,6 @@ class Questionnaire extends Model
     public function deceased(){
         return $this->belongsTo(Deceased::class);
     }
+
+    
 }
