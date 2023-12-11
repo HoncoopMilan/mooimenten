@@ -101,3 +101,25 @@ form{
     margin-top: 20px;
     font-weight: bold;
 }
+
+/*404 Not found page*/
+
+.notFoundCenter{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.notFound{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.notFoundSure{
+    font-style: italic;
+}
+
+.E404{
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
