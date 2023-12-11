@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Photo;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
@@ -62,10 +63,16 @@ class QuestionnaireController extends Controller
             return redirect()->back()->with('imgError', 'Je moet 1 of meerdere afbeeldingen geselecteerd hebben');   
         }
 
-        foreach($request->questions as $question){
-            if($question == null){
+        foreach($request->questions as $question_id => $answer){
+            if($answer == null){
                 return redirect()->back()->with('questionError', 'Je hebt niet alle vragen ingevuld');   
             }
+
+            Answer::create([
+                'answer' => $answer,
+                'questionnaire_id' => $request->questionnaire_id,
+                'question_id' => $question_id,
+            ]);
         }
 
         foreach($request->img as $img){
