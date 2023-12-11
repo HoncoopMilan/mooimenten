@@ -38,6 +38,7 @@ Route::delete('/question/delete/{question}', [QuestionController::class, 'questi
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
 
+Route::post('/questionnaire/storeQuestionnaire', [QuestionnaireController::class, 'storeQuestionnaire'])->name('questionnaire.save');
 Route::get('/questionnaire/{questionnaireName}', [QuestionnaireController::class, 'show'])->name('questionnaire.show');
 Route::resource('questionnaire', QuestionnaireController::class);
 

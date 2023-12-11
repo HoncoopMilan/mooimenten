@@ -1,4 +1,9 @@
 <x-app-layout>
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <li> {{ $error }}</li>
+        @endforeach
+    @endif
     <div class="container">
         <div class="sub-container">
             <div class="overledene">
@@ -19,30 +24,74 @@
                     </div>
                 </div>
             </div>
-            {{-- <h2 style="font-size: 20px">Laat al uw herinneringen achter</h2> --}}
-            <form action="">
+            <form action="{{ route('questionnaire.save') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-container">
+                    @if (\Session::has('questionError'))
+                        <p style="color: red">{!! \Session::get('questionError') !!}</p>
+                    @endif
                     @foreach($questionnaire->questions as $question)
                     <div class="form-group">
                         <?php $questionQuestion = str_ireplace("%name%", $questionnaire->deceased->name, $question->question) ?>
                         <label class="custom-label" >{{$questionQuestion}}</label>
-                       <textarea name="" id="custom-textarea"></textarea>
+                       <textarea name="questions[{{$question->id}}]" id="custom-textarea"></textarea>
                     </div>
                     @endforeach
                     <div class="form-image">
+                        <p id="maxImagesError" style="color:red;"></p>
+                        @if (\Session::has('imgError'))
+                            <p style="color: red">{!! \Session::get('imgError') !!}</p>
+                        @endif
                         <div class="label">
                             <label for="">Voeg foto's in</label>
-                            <label for="">0/3</label>
+                            <label id="countImages" for="">Maximaal 3 foto's</label>
                         </div>
                         <label class="custom-file-upload">
-                            <input type="file" style="display:none"/>
-                            <img src="{{asset('img/add-image.png')}}" alt="">
+                            <input name="img[]" type="file" multiple style="display:none" accept="image/*" onchange="checkImageCount(this)"/>
+                            <img id="img" src="{{asset('img/add-image.png')}}" alt="">
+                            <div id="image-preview-container"></div>
                         </label>
                     </div>
+                    <input type="hidden" name="questionnaire_id" value="{{$questionnaire->id}}" id="">
                     <button type="submit" class="submit-btn">Verstuur uw herinneringen</button>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        function checkImageCount(input) {
+            let imageErrorEl = document.getElementById('maxImagesError');
+
+            if (input.files.length > 3) {
+                imageErrorEl.innerText = "Je kunt maximaal 3 foto's selecteren";
+            }else{
+                imageErrorEl.innerText = "";
+                displaySelectedImages(input)
+            }
+        }
+
+        function displaySelectedImages(input) {
+            var previewContainer = document.getElementById('image-preview-container');
+            let previewImageEl = document.getElementById('img');
+            let countImagesEl = document.getElementById('countImages');
+
+    
+            if (input.files) {
+                previewContainer.innerHTML = ''; // Clear previous previews
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+    
+                    reader.onload = function (e) {
+                        var imgElement = document.createElement('img');
+                        imgElement.src = e.target.result;
+                        imgElement.alt = 'Selected Image';
+                        previewImageEl.style.display = 'none';
+                        previewContainer.appendChild(imgElement);
+                    };
+    
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+    </script>
 </x-app-layout>
