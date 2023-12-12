@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <form action="{{ route('questionnaire.save') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('answer.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-container">
                     @if (\Session::has('questionError'))
