@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -34,16 +35,21 @@ Route::middleware('auth')->group(function () {
 // Kopie route:
 Route::get('/questionnaire/indexCopy', [QuestionnaireController::class, 'indexCopy'])->name('questionnaire.indexCopy');
 
+
 Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::class, 'index'])->name('deceased.questionnaire');
 Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');
 Route::get('/questionnaire/questions/{questionnaireName}', [QuestionController::class, 'index'])->name('questions.questionnaire');
 Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
+
 Route::get('/question', [QuestionController::class, 'questionDashboard'])->name('question.dashboard');
 Route::post('/question/store', [QuestionController::class, 'questionStore'])->name('question.storeQuestion');
-Route::patch('/question/update', [ProfileController::class, 'questionUpdate'])->name('question.update');
+Route::put('/question/update/{question}', [QuestionController::class, 'questionUpdate'])->name('question.update');
+Route::delete('/question/delete/{question}', [QuestionController::class, 'questionDelete'])->name('question.destroy');
+
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
 
+Route::post('/questionnaire/storeQuestionnaire', [QuestionnaireController::class, 'storeQuestionnaire'])->name('questionnaire.save');
 Route::get('/questionnaire/{questionnaireName}', [QuestionnaireController::class, 'show'])->name('questionnaire.show');
 Route::resource('questionnaire', QuestionnaireController::class);
 

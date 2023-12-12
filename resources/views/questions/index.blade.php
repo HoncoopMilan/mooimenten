@@ -7,14 +7,21 @@
         <button type="submit">Submit</button> 
     </form> 
 
-    <div class="form-group" style="margin-top: 20px;">
+    <div class="form" style="margin-top: 20px;">
         @foreach($questions as $question)
+        <div class="form-group" style="display:flex; align-items: center;">
             <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.update',$question->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')     
                 <input style="width: 300px;" type="text" name="question" id="" value="{{$question->question}}">
                 <button type="submit">Aanpassen</button> 
             </form>   
+            <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.destroy', $question->id) }}" method="Post">
+                @csrf
+                @method('DELETE')
+                <button style="margin-left: 5px;" type="submit">Verwijderen</button>
+            </form>
+        </div>
         @endforeach
     </div>
 </x-app-layout>

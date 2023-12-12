@@ -38,6 +38,15 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
+        $questionnaireName = $questionnaire->name;
+
+        if($request->input('action') == "previous"){
+            if($request->questions == NULL){
+                return redirect()->route('deceased.questionnaire', compact('questionnaireName'));
+            }
+        }
+
         $questionCount = count($request->all()) - 2;
         if($questionCount <= 0){
             return redirect()->back()->with('error', 'Je hebt geen vragen geselecteerd'); 
@@ -51,8 +60,11 @@ class QuestionController extends Controller
             $questionnaire->questions()->attach($question);
         }
 
-        $questionnaireName = $questionnaire->name;
-        return redirect()->route('questions.questionnaire', compact('questionnaireName'));   
+        if($request->input('action') == "next"){
+            return view('questionnaire.filledin', compact('questionnaireName'));
+        }else{
+            return redirect()->route('deceased.questionnaire', compact('questionnaireName'));
+        }
 
         
     }
@@ -94,11 +106,11 @@ class QuestionController extends Controller
             $questionnaire->questions()->attach($question);
         }
 
+        $questionnaireName = $questionnaire->name;
+
         if($request->input('action') == "next"){
-            $questionnaireName = $questionnaire->name;
-            return redirect()->route('questions.questionnaire', compact('questionnaireName'));   
+            return view('questionnaire.filledin', compact('questionnaireName'));
         }else{
-            $questionnaireName = $questionnaire->name;
             return redirect()->route('deceased.questionnaire', compact('questionnaireName'));
         }
 
@@ -130,7 +142,7 @@ class QuestionController extends Controller
             
         ]);
 
-        return redirect()->route('questions.questionnaire')->with('succes', 'De vraag is succesvol aangemaakt'); 
+        return redirect()->route('question.dashboard');
     }
 
     /**
@@ -147,6 +159,23 @@ class QuestionController extends Controller
      * Update a question.
      */
     public function questionUpdate(Request $request, question $question){
-        dd($request->all());
+        $request->validate([
+            'question' => 'required',
+        ]);
+
+        $question->question = $request->question;
+        $question->save();
+
+        return redirect()->route('question.dashboard');
+    }
+
+    /**
+     * Delete a question.
+     */
+    public function questionDelete(question $question){
+
+        $question->delete();
+
+        return redirect()->route('question.dashboard');
     }
 }

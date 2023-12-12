@@ -16,7 +16,8 @@
             @endforeach
 
         <input type="hidden" name="questionnaire_id" value="{{$questionnaire->id}}">
-        <button type="submit">Volgende</button>
+        <button type="submit" name="action" value="previous">Vorige</button>
+        <button type="submit" name="action" value="next">Volgende</button>
     </form>
     @else
     <form class="formproject" action="{{ route('questions.update',$questionnaire->id) }}" method="POST" enctype="multipart/form-data">
