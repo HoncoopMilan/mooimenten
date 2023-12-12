@@ -17,7 +17,8 @@ class QuestionnaireSeeder extends Seeder
             'name' => 'Vragenlijst 1',
             'completed_times' => 2,
             'deceased_id' => 1,
-            'expire' => now()
+            'expire' => now(),
+            'customer_code' => 'AREWfcew$2',
         ]);
     }
 }

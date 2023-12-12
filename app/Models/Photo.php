@@ -10,4 +10,8 @@ class Photo extends Model
     protected $fillable = ['img', 'questionnaire_id'];
 
     use HasFactory;
+
+    public function questionnaire(){
+        return $this->belongsTo(Questionnaire::class);
+    }
 }
