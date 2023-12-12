@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
@@ -35,7 +36,7 @@ Route::middleware('auth')->group(function () {
 // Kopie route:
 Route::get('/questionnaire/indexCopy', [QuestionnaireController::class, 'indexCopy'])->name('questionnaire.indexCopy');
 
-
+Route::get('/questionnaire/information/{questionnaireName}', [QuestionnaireController::class, 'filledin'])->name('questionnaire.filledin');
 Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::class, 'index'])->name('deceased.questionnaire');
 Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');
 Route::get('/questionnaire/questions/{questionnaireName}', [QuestionController::class, 'index'])->name('questions.questionnaire');
@@ -49,7 +50,9 @@ Route::delete('/question/delete/{question}', [QuestionController::class, 'questi
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
 
-Route::post('/questionnaire/storeQuestionnaire', [QuestionnaireController::class, 'storeQuestionnaire'])->name('questionnaire.save');
+Route::post('/answer/check', [AnswerController::class, 'check'])->name('answer.check');
+Route::get('/answer/{customercode}', [AnswerController::class, 'show'])->name('answers.show');
+Route::resource('answer', AnswerController::class);
 Route::get('/questionnaire/{questionnaireName}', [QuestionnaireController::class, 'show'])->name('questionnaire.show');
 Route::resource('questionnaire', QuestionnaireController::class);
 

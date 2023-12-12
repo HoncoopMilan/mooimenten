@@ -24,6 +24,15 @@ class QuestionnaireController extends Controller
     }
 
     /**
+     * Everything is filled in.
+     */
+    public function filledin($questionnaireName)
+    {
+        $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
+        return view('questionnaire.filledin', compact('questionnaire'));
+    }
+
+    /**
      * Deceased step from the form.
      */
     public function deceased()
@@ -53,47 +62,17 @@ class QuestionnaireController extends Controller
             'name' => 'required|min:3',
         ]);
 
+        $faker = \Faker\Factory::create('nl_NL');
+
         Questionnaire::create([
             'name' => $request->name,
             'deceased_id' => null,
             'expire' => now()->addMinutes(65),
-            
+            'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}')
         ]);
         
         return redirect()->route('questionnaire.index')->with('succes', 'De vragenlijst is succesvol aangemaakt');   
 
-    }
-    /**
-     * Save the questionnaire.
-     */
-    public function storeQuestionnaire(Request $request){
-        if($request->img == null){
-            return redirect()->back()->with('imgError', 'Je moet 1 of meerdere afbeeldingen geselecteerd hebben');   
-        }
-
-        foreach($request->questions as $question_id => $answer){
-            if($answer == null){
-                return redirect()->back()->with('questionError', 'Je hebt niet alle vragen ingevuld');   
-            }
-
-            Answer::create([
-                'answer' => $answer,
-                'questionnaire_id' => $request->questionnaire_id,
-                'question_id' => $question_id,
-            ]);
-        }
-
-        foreach($request->img as $img){
-            $faker = \Faker\Factory::create('nl_NL');
-            $imgName = $faker->numberBetween(10000, 200000) . $img->getClientOriginalName();
-
-            Photo::create([
-                'img' => $imgName,
-                'questionnaire_id' => $request->questionnaire_id
-            ]);
-
-            $img->storeAs('public/answers', $imgName);
-        }
     }
 
     /**
