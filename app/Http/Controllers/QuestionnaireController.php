@@ -15,6 +15,11 @@ class QuestionnaireController extends Controller
         $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
         return view('questionnaire.index', compact('questionnaires'));
     }
+    public function indexCopy()
+    {
+        $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
+        return view('questionnaire.indexCopy', compact('questionnaires'));
+    }
 
     /**
      * Deceased step from the form.

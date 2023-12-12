@@ -101,3 +101,150 @@ form{
     margin-top: 20px;
     font-weight: bold;
 }
+
+
+/* questionnaire index: */
+.questionnaire-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.questionnaire-sub-container{
+    width: 968px;
+}
+.questionnaire-btn{
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 300px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    margin-right: 40px;
+    font-weight: bold;
+}
+.questionnaire-search{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 32px;
+}
+.questionnaire-search input{
+    padding-left: 40px;
+}
+#searchInput{
+    border: 2px solid black;
+    border-radius: 8px;
+    height: 32px;
+    width: 100%;
+}
+.section-1{
+    display: flex;
+}
+.search-bar{
+    background-image: url('/img/search.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 5px center;
+    
+
+}
+.questonnaire-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+}
+.questionnaire{
+    border: 3px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #D1DCD1;
+}
+.questionnaire-info{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.document{
+    display: flex;
+    align-items: center;
+}
+.edit{
+    display: flex;
+    justify-content: flex-end;
+    padding: 2px;
+}
+.document-btn{
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    height: 32px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+#myModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 60%; /* Aanpassen aan de gewenste breedte van de modal */
+    max-width: 400px; /* Voeg een max-width toe om de modal niet te breed te maken op grote schermen */
+    background-color: white; /* Achtergrondkleur van de modal */
+    padding: 20px; /* Voeg wat ruimte toe binnen de modal */
+    border-radius: 8px; /* Voeg afgeronde hoeken toe aan de modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Voeg een lichte schaduw toe voor diepte */
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.dark-background {
+    background-color: rgba(0, 0, 0, 0.5); /* Donkere achtergrondkleur met een lichte transparantie */
+}
+.close{
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+.close-img{
+    width: 30px;
+}
+.questionnaire-form{
+    display: flex;
+    justify-content: center;
+}
+.questionnaire-make-btn{
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    color: white;
+    height: 32px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
+}
+.form-flex{
+    display: flex;
+    flex-direction: column;
+}
+.questionnaire-name{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
