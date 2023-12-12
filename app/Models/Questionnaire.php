@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Questionnaire extends Model
 {
-    protected $fillable = ['name', 'expire'];
+    protected $fillable = ['name', 'expire', 'customer_code'];
 
     use HasFactory;
 
@@ -17,6 +17,14 @@ class Questionnaire extends Model
 
     public function deceased(){
         return $this->belongsTo(Deceased::class);
+    }
+
+    public function photos(){
+        return $this->hasMany(Photo::class);
+    }
+
+    public function answers(){
+        return $this->hasMany(Answer::class);
     }
 
     

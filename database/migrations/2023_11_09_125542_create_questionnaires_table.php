@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('deceased_id')->nullable();
             $table->foreign('deceased_id')->references('id')->on('deceaseds');
             $table->timestamp('expire');
+            $table->string('customer_code');
             $table->timestamps();
         });
     }

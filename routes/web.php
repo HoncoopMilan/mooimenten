@@ -39,6 +39,8 @@ Route::delete('/question/delete/{question}', [QuestionController::class, 'questi
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
 
+Route::post('/answer/check', [AnswerController::class, 'check'])->name('answer.check');
+Route::get('/answer/{customercode}', [AnswerController::class, 'show'])->name('answers.show');
 Route::resource('answer', AnswerController::class);
 Route::get('/questionnaire/{questionnaireName}', [QuestionnaireController::class, 'show'])->name('questionnaire.show');
 Route::resource('questionnaire', QuestionnaireController::class);

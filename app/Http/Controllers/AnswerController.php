@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Photo;
+use App\Models\Question;
+use App\Models\Questionnaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
 {
@@ -13,7 +16,12 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check() == true && Auth::user()->admin != 0){
+            $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
+            return view('answers.index', compact('questionnaires'));
+        }
+        $questionnaires = false;
+        return view('answers.index', compact('questionnaires'));
     }
 
     /**
@@ -22,6 +30,19 @@ class AnswerController extends Controller
     public function create()
     {
         //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function check(Request $request)
+    {
+        if(count(Questionnaire::where('customer_code', $request->customercode)->get()) > 0){
+            $customercode = $request->customercode;
+            return redirect()->route('answers.show', compact('customercode'));   
+        }else{
+            return redirect()->back()->with('error', 'Je klanten code is niet geldig');   
+        }
     }
 
     /**
@@ -61,9 +82,10 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $customercode)
     {
-        //
+        $questionnaire = Questionnaire::where('customer_code', $customercode)->get()->first();
+        return view('answers.show', compact('questionnaire'));
     }
 
     /**
