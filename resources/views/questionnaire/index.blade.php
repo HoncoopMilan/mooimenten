@@ -20,7 +20,11 @@
             <div class="section-1">
                 <div class="questionnaire-btn">
                     {{-- Pop up maken: --}}
-                    <a href="javascript:void(0);" onclick="openModal()">Maak een vragenlijst aan</a>
+                    <a href="javascript:void(0);" onclick="openModal()">Vragenlijst aanmaken</a>
+                </div>
+                <div class="questionnaire-btn">
+                    {{-- Pop up maken: --}}
+                    <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
                 </div>
                 <div class="questionnaire-search">
                     <input type="text" id="searchInput" class="search-bar" placeholder="Zoeken...">
