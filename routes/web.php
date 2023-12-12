@@ -33,9 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Kopie route:
-Route::get('/questionnaire/indexCopy', [QuestionnaireController::class, 'indexCopy'])->name('questionnaire.indexCopy');
-
 Route::get('/questionnaire/information/{questionnaireName}', [QuestionnaireController::class, 'filledin'])->name('questionnaire.filledin');
 Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::class, 'index'])->name('deceased.questionnaire');
 Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');

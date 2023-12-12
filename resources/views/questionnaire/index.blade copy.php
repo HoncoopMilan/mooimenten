@@ -44,6 +44,9 @@
                                 <img style="margin-right: 5px" src="{{ asset('img/document.png')}}" alt="">
                                 <p><strong>{{$questionnaire->completed_times}}x</strong> ingevuld</p>
                             </div>
+                            {{-- <div class="document-btn">
+                                <a href="">Maak word document</a>
+                            </div>                       --}}
                         </div>
                     </div>
                 @endforeach
