@@ -24,6 +24,15 @@ class QuestionnaireController extends Controller
     }
 
     /**
+     * Everything is filled in.
+     */
+    public function filledin($questionnaireName)
+    {
+        $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
+        return view('questionnaire.filledin', compact('questionnaire'));
+    }
+
+    /**
      * Deceased step from the form.
      */
     public function deceased()

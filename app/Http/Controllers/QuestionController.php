@@ -61,7 +61,7 @@ class QuestionController extends Controller
         }
 
         if($request->input('action') == "next"){
-            return view('questionnaire.filledin', compact('questionnaireName'));
+            return redirect()->route('questionnaire.filledin', compact('questionnaireName'));
         }else{
             return redirect()->route('deceased.questionnaire', compact('questionnaireName'));
         }
@@ -109,7 +109,7 @@ class QuestionController extends Controller
         $questionnaireName = $questionnaire->name;
 
         if($request->input('action') == "next"){
-            return view('questionnaire.filledin', compact('questionnaireName'));
+            return redirect()->route('questionnaire.filledin', compact('questionnaireName'));
         }else{
             return redirect()->route('deceased.questionnaire', compact('questionnaireName'));
         }
