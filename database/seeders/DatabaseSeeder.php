@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             DeceasedSeeder::class,
             QuestionnaireSeeder::class,
             QuestionSeeder::class,
+            UserSeeder::class,
         ]);
 
         foreach(\App\Models\Question::all() as $question){
