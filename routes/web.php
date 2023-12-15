@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
@@ -51,11 +52,12 @@ Route::middleware(['auth', 'checkadmin'])->group(function () {
 
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
+Route::resource('companies', CompanyController::class)->middleware(['auth', 'checkadmin']);
 
 Route::post('/answer/check', [AnswerController::class, 'check'])->name('answer.check');
 Route::get('/answer/{customercode}', [AnswerController::class, 'show'])->name('answers.show');
 Route::resource('answer', AnswerController::class);
 Route::get('/questionnaire/{questionnaireName}', [QuestionnaireController::class, 'show'])->name('questionnaire.show');
-Route::resource('questionnaire', QuestionnaireController::class)->middleware('auth');;
+Route::resource('questionnaire', QuestionnaireController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
