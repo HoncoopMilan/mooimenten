@@ -20,7 +20,12 @@
             <div class="section-1">
                 <div class="questionnaire-btn">
                     {{-- Pop up maken: --}}
-                    <a href="javascript:void(0);" onclick="openModal()">Vragenlijst aanmaken</a>
+                    {{-- <a href="javascript:void(0);" onclick="openModal()">Vragenlijst aanmaken</a> --}}
+                    <form class="questionnaireCreateForm" action="{{ route('questionnaire.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf  
+                        <input style="display: none" type="text" name="name" id="">
+                    </form>
+                    <button class="questionnaireCreate" style="margin-left: 5px;">Vragenlijst aanmaken</button>
                 </div>
                 <div class="questionnaire-btn">
                     {{-- Pop up maken: --}}
@@ -52,14 +57,20 @@
                     </div>
                 @endforeach
             </div>
-            <form action="{{ route('questionnaire.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf  
-                <input type="text" name="name" id="">
-                <button type="submit">Submit</button> 
-            </form>
         </div>
     </div>
-    <script>
+    <script>            
+        const questionnaireCreate = document.querySelector('.questionnaireCreate');
+        const questionnaireForm = document.querySelector('.questionnaireCreateForm');
+
+        questionnaireCreate.addEventListener('click', () => {
+            let questionnaireName = prompt('Naam van de vragenlijst');
+            let nameInput = questionnaireForm.querySelector('input[name="name"]');
+            nameInput.value = questionnaireName;
+
+            questionnaireForm.submit();
+        });
+        
         // Haal de modal op
         var modal = document.getElementById('myModal');
       
