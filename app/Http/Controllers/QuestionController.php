@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Questionnaire;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -173,6 +174,13 @@ class QuestionController extends Controller
      * Delete a question.
      */
     public function questionDelete(question $question){
+        dd($question->id);
+        $answers = Answer::where('question_id', $question->id)->get();
+        foreach($answers as $answer){
+            $answer->delete();
+        }
+
+        $question->questionnaires()->detach();
 
         $question->delete();
 
