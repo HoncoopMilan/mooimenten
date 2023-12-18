@@ -27,10 +27,12 @@
                     </form>
                     <button class="questionnaireCreate" style="margin-left: 5px;">Vragenlijst aanmaken</button>
                 </div>
-                <div class="questionnaire-btn">
-                    {{-- Pop up maken: --}}
-                    <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
-                </div>
+                @if(Auth::user()->admin == 1)
+                    <div class="questionnaire-btn">
+                        {{-- Pop up maken: --}}
+                        <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
+                    </div>
+                @endif
                 <div class="questionnaire-search">
                     <input type="text" id="searchInput" class="search-bar" placeholder="Zoeken...">
                     <button class="search-btn" onclick="search()"></button>
