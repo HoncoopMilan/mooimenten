@@ -1,7 +1,6 @@
 <x-app-layout>
-<div class="notFoundCenter">
-    <h1 class="E404">404 Not found</h1>
-    <h2 class="notFound">Pagina is niet gevonden</h2>
-    <p class="notFoundSure">Weet u zeker dat de link goed is getypt?</p>
+<div style="text-align: center;">
+    <h1 style="font-size: 45px; font-weight: bold;">Pagina is niet gevonden</h1>
+    <p style="font-size: 15px;">Weet u zeker dat de link goed is getypt?</p>
 </div>
 </x-app-layout>
