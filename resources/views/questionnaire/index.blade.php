@@ -77,7 +77,7 @@
         var modal = document.getElementById('myModal');
       
         // Haal de knop op die de modal opent
-        var btn = document.querySelector('.questionnaire-btn a');
+        // var btn = document.querySelector('.questionnaire-btn a');
       
         // Haal het kruisje op om de modal te sluiten
         var span = document.querySelector('.close');
