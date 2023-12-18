@@ -70,43 +70,45 @@
             let nameInput = questionnaireForm.querySelector('input[name="name"]');
             nameInput.value = questionnaireName;
 
-            questionnaireForm.submit();
+            if(questionnaireName != null){
+                questionnaireForm.submit();
+            }
         });
         
-        // Haal de modal op
-        var modal = document.getElementById('myModal');
+        // // Haal de modal op
+        // var modal = document.getElementById('myModal');
       
-        // Haal de knop op die de modal opent
-        // var btn = document.querySelector('.questionnaire-btn a');
+        // // Haal de knop op die de modal opent
+        // // var btn = document.querySelector('.questionnaire-btn a');
       
-        // Haal het kruisje op om de modal te sluiten
-        var span = document.querySelector('.close');
+        // // Haal het kruisje op om de modal te sluiten
+        // var span = document.querySelector('.close');
 
-        var questionnaireContainer = document.querySelector('.questionnaire-container');
+        // var questionnaireContainer = document.querySelector('.questionnaire-container');
       
-        btn.onclick = function() {
-            modal.style.display = 'block';
-            questionnaireContainer.classList.add('dark-background');
-        }
+        // btn.onclick = function() {
+        //     modal.style.display = 'block';
+        //     questionnaireContainer.classList.add('dark-background');
+        // }
 
-        span.onclick = function() {
-            modal.style.display = 'none';
-            questionnaireContainer.classList.remove('dark-background');
-        }
+        // span.onclick = function() {
+        //     modal.style.display = 'none';
+        //     questionnaireContainer.classList.remove('dark-background');
+        // }
 
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-                questionnaireContainer.classList.remove('dark-background');
-            }
-        }
-        function closeModal() {
-            modal.style.display = 'none';
-            questionnaireContainer.classList.remove('dark-background');
-        }
-        function openModal() {
-            modal.style.display = 'block';
-            questionnaireContainer.classList.add('dark-background');
-        }
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //         modal.style.display = 'none';
+        //         questionnaireContainer.classList.remove('dark-background');
+        //     }
+        // }
+        // function closeModal() {
+        //     modal.style.display = 'none';
+        //     questionnaireContainer.classList.remove('dark-background');
+        // }
+        // function openModal() {
+        //     modal.style.display = 'block';
+        //     questionnaireContainer.classList.add('dark-background');
+        // }
       </script>
 </x-app-layout>
