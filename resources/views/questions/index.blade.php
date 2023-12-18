@@ -16,12 +16,22 @@
                 <input style="width: 300px;" type="text" name="question" id="" value="{{$question->question}}">
                 <button type="submit">Aanpassen</button> 
             </form>   
-            <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.destroy', $question->id) }}" method="Post">
+            <form id="delete" style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.destroy', $question->id) }}" method="Post">
                 @csrf
                 @method('DELETE')
-                <button style="margin-left: 5px;" type="submit">Verwijderen</button>
             </form>
+            <button id="submit" style="margin-left: 5px;">Verwijderen</button>
         </div>
         @endforeach
     </div>
+    <script>
+        const submit = document.querySelector('#submit');
+
+        submit.addEventListener('click', () => {
+            let sure = confirm('Als u de vraag verwijderd zal deze ook uit alle bestaande vragenlijsten worden verwijderd');
+            if(sure == true){
+                document.querySelector('#delete').submit();
+            }
+        })
+    </script>
 </x-app-layout>
