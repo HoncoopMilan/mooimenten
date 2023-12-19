@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Questionnaire extends Model
 {
-    protected $fillable = ['name', 'expire', 'customer_code'];
+    protected $fillable = ['name', 'expire', 'customer_code', 'company_id'];
 
     use HasFactory;
 

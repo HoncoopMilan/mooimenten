@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Deceased;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DeceasedController extends Controller
@@ -15,13 +16,19 @@ class DeceasedController extends Controller
     public function index($questionnaireName)
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
-        if($questionnaire->deceased_id == null){
-            $deceased = null;
+        if(Auth::user()->admin == 1 || Auth::user()->company_id == $questionnaire->company_id){
+            if($questionnaire->deceased_id == null){
+                //Deceased geeft aan of de informatie over de overledenen al een keer is ingevuld
+                $deceased = null;
+            }
+            else{
+                $deceased = Deceased::where('id',$questionnaire->deceased_id)->get()->first();
+            };
+
+            return view('questionnaire.deceased', compact('questionnaire', 'deceased'));
+        }else{
+            return view('404');
         }
-        else{
-            $deceased = Deceased::where('id',$questionnaire->deceased_id)->get()->first();
-        };
-        return view('questionnaire.deceased', compact('questionnaire', 'deceased'));
     }
 
     /**
@@ -64,6 +71,7 @@ class DeceasedController extends Controller
         $request->file('img')
         ->storeAs('public', $imgName);
 
+        //Linkt de informatie van de overledenen met de goede vragenlijst
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
         $questionnaire->deceased_id = $deceased->id;
         $questionnaire->save();

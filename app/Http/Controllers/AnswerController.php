@@ -54,6 +54,7 @@ class AnswerController extends Controller
             return redirect()->back()->with('imgError', 'Je moet 1 of meerdere afbeeldingen geselecteerd hebben');   
         }
 
+        //Checkt of alle vragen zijn ingevuld en slaat ze op
         foreach($request->questions as $question_id => $answer){
             if($answer == null){
                 return redirect()->back()->with('questionError', 'Je hebt niet alle vragen ingevuld');   
@@ -81,8 +82,6 @@ class AnswerController extends Controller
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         $questionnaire->completed_times = $questionnaire->completed_times + 1;
         $questionnaire->save();
-
-
     }
 
     /**
