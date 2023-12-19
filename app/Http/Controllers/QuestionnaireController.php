@@ -21,6 +21,8 @@ class QuestionnaireController extends Controller
         }else if(Auth::user()->company_id != null){
             $questionnaires = Questionnaire::where('company_id', Auth::user()->company_id)->orderBy('id', 'desc')->get();
             return view('questionnaire.index', compact('questionnaires'));
+        }else{
+            return redirect('/');
         }
     }
 
@@ -31,7 +33,7 @@ class QuestionnaireController extends Controller
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
 
-        if(Auth::user()->admin == 1 || Auth::user()->company_id == $questionnaire->company_id){
+        if(Auth::user()->admin == 1 || (Auth::user()->company_id == $questionnaire->company_id && Auth::user()->company_id != null)){
             return view('questionnaire.filledin', compact('questionnaire'));
         }else{
             return view('404');

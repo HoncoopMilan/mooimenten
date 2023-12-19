@@ -52,7 +52,11 @@ Route::middleware(['auth', 'checkadmin'])->group(function () {
 
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
-Route::resource('companies', CompanyController::class)->middleware(['auth', 'checkadmin']);
+
+Route::middleware(['auth', 'checkadmin'])->group(function () {
+    Route::get('/companies/{companyName}', [CompanyController::class, 'edit'])->name('companie.edit');
+    Route::resource('companies', CompanyController::class);
+});
 
 Route::post('/answer/check', [AnswerController::class, 'check'])->name('answer.check');
 Route::get('/answer/{customercode}', [AnswerController::class, 'show'])->name('answers.show');

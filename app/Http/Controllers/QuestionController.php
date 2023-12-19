@@ -17,7 +17,7 @@ class QuestionController extends Controller
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
         
-        if(Auth::user()->admin == 1 || Auth::user()->company_id == $questionnaire->company_id){
+        if(Auth::user()->admin == 1 || (Auth::user()->company_id == $questionnaire->company_id && Auth::user()->company_id != null)){
             //questionEntered checkt of er al een keer vragen zijn geselecteerd
             $questionEntered = 1;
 
