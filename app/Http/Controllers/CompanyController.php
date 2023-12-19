@@ -96,6 +96,18 @@ class CompanyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $company = Company::where('id', $id)->first();
+        $users = User::where('company_id', $company->id)->get();
+
+        if($users != null){
+            foreach($users as $user){
+                $user->company_id = null;
+                $user->save();
+            }
+        }
+
+        $company->delete();
+
+        return redirect()->route('companies.index');
     }
 }
