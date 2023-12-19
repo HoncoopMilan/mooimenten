@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -11,7 +12,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::orderBy('id', 'desc')->get();
+        return view('companies.index', compact('companies'));
     }
 
     /**
@@ -27,7 +29,19 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Company::where('name', $request->name)->exists()){
+            return redirect()->back()->with('error', 'De naam bestaat al');   
+        }
+
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Company::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('companies.index')->with('succes', 'het bedrijf is succesvol aangemaakt');   
     }
 
     /**
@@ -45,6 +59,14 @@ class CompanyController extends Controller
     {
         //
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function editCompany(string $companyName)
+    {
+        //
+    }    
 
     /**
      * Update the specified resource in storage.
