@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Photo;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionnaireController extends Controller
 {
@@ -14,13 +15,13 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
-        return view('questionnaire.index', compact('questionnaires'));
-    }
-    public function indexCopy()
-    {
-        $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
-        return view('questionnaire.indexCopy', compact('questionnaires'));
+        if(Auth::user()->admin == 1){
+            $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
+            return view('questionnaire.index', compact('questionnaires'));
+        }else if(Auth::user()->company_id != null){
+            $questionnaires = Questionnaire::where('company_id', Auth::user()->company_id)->orderBy('id', 'desc')->get();
+            return view('questionnaire.index', compact('questionnaires'));
+        }
     }
 
     /**
@@ -64,12 +65,23 @@ class QuestionnaireController extends Controller
 
         $faker = \Faker\Factory::create('nl_NL');
 
-        Questionnaire::create([
-            'name' => $request->name,
-            'deceased_id' => null,
-            'expire' => now()->addMinutes(65),
-            'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}')
-        ]);
+        if(Auth::user()->company_id != null){
+            Questionnaire::create([
+                'name' => $request->name,
+                'deceased_id' => null,
+                'expire' => now()->addMinutes(65),
+                'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
+                'company_id' => Auth::user()->company_id
+            ]);
+        }else{
+            Questionnaire::create([
+                'name' => $request->name,
+                'deceased_id' => null,
+                'expire' => now()->addMinutes(65),
+                'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}')
+            ]);
+        }
+
         
         return redirect()->route('questionnaire.index')->with('succes', 'De vragenlijst is succesvol aangemaakt');   
 
