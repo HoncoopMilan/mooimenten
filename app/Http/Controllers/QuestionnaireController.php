@@ -30,7 +30,12 @@ class QuestionnaireController extends Controller
     public function filledin($questionnaireName)
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
-        return view('questionnaire.filledin', compact('questionnaire'));
+
+        if(Auth::user()->admin == 1 || Auth::user()->company_id == $questionnaire->company_id){
+            return view('questionnaire.filledin', compact('questionnaire'));
+        }else{
+            return view('404');
+        }
     }
 
     /**

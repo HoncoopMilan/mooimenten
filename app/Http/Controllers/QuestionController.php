@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Questionnaire;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -14,15 +15,19 @@ class QuestionController extends Controller
      */
     public function index($questionnaireName)
     {
-        $questionEntered = 1;
-
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
         
-        if(count($questionnaire->questions) <= 0){
-            $questionEntered = null;
+        if(Auth::user()->admin == 1 || Auth::user()->company_id == $questionnaire->company_id){
+            $questionEntered = 1;
+
+            if(count($questionnaire->questions) <= 0){
+                $questionEntered = null;
+            }
+            $questions = Question::orderBy('id')->get();
+            return view('questionnaire.questions', compact('questionnaire', 'questions', 'questionEntered'));
+        }else{
+            return view('404');
         }
-        $questions = Question::orderBy('id')->get();
-        return view('questionnaire.questions', compact('questionnaire', 'questions', 'questionEntered'));
 
     }
 
