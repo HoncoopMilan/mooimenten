@@ -59,8 +59,13 @@ class CompanyController extends Controller
     public function edit(string $companyName)
     {
         $company = Company::where('name', $companyName)->first();
-        $users = User::whereNull('company_id')->get();
-        return view('companies.edit', compact('company', 'users'));
+        if($company != null){
+            $users = User::whereNull('company_id')->get();
+            return view('companies.edit', compact('company', 'users'));
+        }else{
+            return view('404');   
+        }
+
     }
 
     /**

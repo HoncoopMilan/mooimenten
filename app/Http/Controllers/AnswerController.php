@@ -90,7 +90,11 @@ class AnswerController extends Controller
     public function show(string $customercode)
     {
         $questionnaire = Questionnaire::where('customer_code', $customercode)->get()->first();
-        return view('answers.show', compact('questionnaire'));
+        if($questionnaire != null){
+            return view('answers.show', compact('questionnaire'));
+        }else{
+            return view('404');
+        }
     }
 
     /**
