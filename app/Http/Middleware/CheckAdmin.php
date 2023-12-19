@@ -21,6 +21,6 @@ class CheckAdmin
                 return $next($request);
             }
         }
-        return redirect('404');
+        return response(view('404'), 404);
     }
 }
