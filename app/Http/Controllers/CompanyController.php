@@ -68,7 +68,27 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        //Zorgt ervoor dat een user aan een company word gelinkt
+        if($request->users != null){
+            foreach($request->users as $user_id){
+                $user = User::where('id', $user_id)->first();
+                $user->company_id = $request->company_id;
+                $user->save();
+            }
+        }
+
+        if($request->delete_users != null){
+            foreach($request->delete_users as $user_id){
+                $user = User::where('id', $user_id)->first();
+                $user->company_id = null;
+                $user->save();
+            }
+        }
+
+        $company = Company::where('id', $request->company_id)->first();
+        $companyName = $company->name;
+        return redirect()->route('companie.edit', compact('companyName'));   
     }
 
     /**
