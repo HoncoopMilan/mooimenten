@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -55,18 +56,12 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $companyName)
     {
-        //
+        $company = Company::where('name', $companyName)->first();
+        $users = User::whereNull('company_id')->get();
+        return view('companies.edit', compact('company', 'users'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function editCompany(string $companyName)
-    {
-        //
-    }    
 
     /**
      * Update the specified resource in storage.

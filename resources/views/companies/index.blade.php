@@ -13,7 +13,7 @@
 
     @foreach($companies as $company)
     <div class="companies" style="margin-bottom: 10px;">
-        <p>{{$company->name}}</p>
+        <a href="{{route('companie.edit', $company->name)}}">{{$company->name}}</a>
         @if(count($company->users) > 0)
             <p>Gekoppelde gebruikers: {{ count($company->users) }}</p>
         @else

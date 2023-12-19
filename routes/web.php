@@ -52,6 +52,7 @@ Route::middleware(['auth', 'checkadmin'])->group(function () {
 
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
+Route::get('/companies/{companyName}', [CompanyController::class, 'edit'])->name('companie.edit')->middleware(['auth', 'checkadmin']);
 Route::resource('companies', CompanyController::class)->middleware(['auth', 'checkadmin']);
 
 Route::post('/answer/check', [AnswerController::class, 'check'])->name('answer.check');
