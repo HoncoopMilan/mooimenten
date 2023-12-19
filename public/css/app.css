@@ -248,11 +248,22 @@ header{
 
 
 
+
 /* deceased */
 .deceased-container{
     display: flex;
     justify-content: center;
     
+}
+.custom-file-upload-deceased{
+    border: 2px solid #6C7C79;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    padding-bottom: 70px;
+    padding-top: 70px;
+    width: 300px;
 }
 .deceased-sub-container{
 
@@ -271,4 +282,6 @@ header{
     width: 100px;
     text-align: center;
     color: white;
+    margin-top: 20px;
+    margin-bottom: 50px;
 }

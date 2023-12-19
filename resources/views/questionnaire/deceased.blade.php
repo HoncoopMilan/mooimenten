@@ -2,44 +2,47 @@
     <div class="deceased-container">
         <div class="deceased-sub-container">
             <div class="deceased-sub-sub-container">
-                <h1 style="font-size: 20px; margin-bottom: 20px;">Vul hieronder de gegevens in van de overledene</h1>
+                <h1 style="font-size: 20px; margin-bottom: 20px; margin-top: 40px;">Vul hieronder de gegevens in van de overledene</h1>
                 @if( !isset($deceased))
                     <form class="formproject" action="{{ route('deceased.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-input-questionnaire">
+                            <strong>Naam</strong>
                             <input type="text" name="name" placeholder="Naam">
                             @error('name')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-input-questionnaire">
+                            <strong>Stad</strong>
                             <input type="text" name="city" placeholder="Stad">
                             @error('city')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-input-questionnaire">
-                            <input type="text" name="zipcode" placeholder="Postcode">
+                            <strong>Postcode</strong>
+                            <input type="text" name="zipcode" placeholder="Bijv. 1234 AB">
                             @error('adress')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-input-questionnaire">
-
-                            <input type="text" name="adress" placeholder="Straat naam + Huisnummer">
+                            <strong>Straatnaam + huisnummer</strong>
+                            <input type="text" name="adress" placeholder="Bijv. Mooiestraat 12">
                             @error('adress')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-input-questionnaire">
-                            
+                            <strong>Geboortedatum</strong>
                             <input type="date" name="date_of_birth">
                             @error('date_of_birth')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror           
                         </div>
                         <div class="form-input-questionnaire">
-                            
+                            <strong>Sterfdatum</strong>
                             <input type="date" name="date_of_death">
                             @error('date_of_death')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -53,8 +56,7 @@
                             @enderror
                         </div> --}}
                         <Strong>Upload hier een foto van de overledene</Strong>
-                        <label class="custom-file-upload">
-                            
+                        <label class="custom-file-upload-deceased">
                             <input name="img" type="file" multiple style="display:none" accept="image/*" onchange="checkImageCount(this)"/>
                             <img id="img" src="{{asset('img/add-image.png')}}" alt="">
                         </label>
