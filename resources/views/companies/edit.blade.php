@@ -11,18 +11,24 @@
             <label for="">{{$user->name}}</label>
         @endforeach
     @endif
-    
     <div class="add-users" style="display: flex; margin-top: 15px;">
-        <label for="users">Voeg gebruiker(s) toe:</label>
-        <select name="users[]" multiple>
-            @foreach($users as $user)
-            <option value="{{$user->id}}">{{$user->name}}</option>
-            @endforeach
-        </select>
+        @if(count($users) > 0)
+                <label for="users">Voeg gebruiker(s) toe:</label>
+                <select name="users[]" multiple>
+                    @foreach($users as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endforeach
+                </select>
+        @else
+            <p>Er zijn geen gebruikers over om te koppelen</p>
+        @endif
     </div>
 
-    <input type="hidden" name="company_id" value="{{$company->id}}" id="">
-    <button type="submit">Updaten</button>
+    <div class="update" style="margin-top: 10px">
+        <input type="hidden" name="company_id" value="{{$company->id}}" id="">
+        <button type="submit">Updaten</button>
+    </div>
+
 
     </form>
         
