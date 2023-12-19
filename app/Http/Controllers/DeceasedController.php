@@ -18,6 +18,7 @@ class DeceasedController extends Controller
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
         if(Auth::user()->admin == 1 || Auth::user()->company_id == $questionnaire->company_id){
             if($questionnaire->deceased_id == null){
+                //Deceased geeft aan of de informatie over de overledenen al een keer is ingevuld
                 $deceased = null;
             }
             else{
@@ -70,6 +71,7 @@ class DeceasedController extends Controller
         $request->file('img')
         ->storeAs('public', $imgName);
 
+        //Linkt de informatie van de overledenen met de goede vragenlijst
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
         $questionnaire->deceased_id = $deceased->id;
         $questionnaire->save();

@@ -18,6 +18,7 @@ class QuestionController extends Controller
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
         
         if(Auth::user()->admin == 1 || Auth::user()->company_id == $questionnaire->company_id){
+            //questionEntered checkt of er al een keer vragen zijn geselecteerd
             $questionEntered = 1;
 
             if(count($questionnaire->questions) <= 0){
@@ -60,6 +61,7 @@ class QuestionController extends Controller
 
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
 
+        //Alle geselecteerde vragen koppelen met de vragenlijst via een koppel tabel
         foreach($request->questions as $question){
             $questionnaire = Questionnaire::find($request->questionnaire_id);
             $question = Question::find($question);
@@ -106,6 +108,7 @@ class QuestionController extends Controller
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
         $questionnaire->questions()->detach();
 
+        //Alle geselecteerde vragen koppelen met de vragenlijst via een koppel tabel
         foreach($request->questions as $question){
             $questionnaire = Questionnaire::find($request->questionnaire_id);
             $question = Question::find($question);
