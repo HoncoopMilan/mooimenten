@@ -48,13 +48,6 @@
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
                         </div>
-                        {{-- <div class="form-input-questionnaire">
-                            <strong>Foto van hem:</strong>
-                            <input type="file" name="img" multiple="true">
-                            @error('img')
-                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                            @enderror
-                        </div> --}}
                         <Strong>Upload hier een foto van de overledene</Strong>
                         <label class="custom-file-upload-deceased">
                             <input name="img" type="file" multiple style="display:none" accept="image/*" onchange="checkImageCount(this)"/>
@@ -124,13 +117,6 @@
                                 <input name="img" type="file" multiple style="display:none" accept="image/*" onchange="checkImageCount(this)"/>
                                 <img id="img" src="{{asset('img/add-image.png')}}" alt="">
                             </label>
-                            {{-- <div class="form-input-questionnaire">
-                                <strong>Upload hier een foto van de overledene</strong>
-                                <input type="file" name="img" multiple="true">
-                                @error('img')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
                         @endif
                         <input type="hidden" name="questionnaire_id" value="{{$questionnaire->id}}">
                         <div class="deceased-btn">
