@@ -30,13 +30,13 @@ header{
 
 
 /* questions/index */
-.container{
+.show-container{
     display: flex;
     justify-content: center;
     margin-top: 40px;
     
 }
-.sub-container{
+.show-sub-container{
     width: 300px;
 }
 .overledene{
@@ -345,6 +345,39 @@ header{
 .question-btn-flex{
     display: flex;
     justify-content: space-between;
+}
+
+/* information */
+.information-container{
+    display: flex;
+    justify-content: center;
+}
+.information-sub-container{
+    display: flex;
+    justify-content: center;
+    width: 968px;
+}
+.succes{
+    display:flex; 
+    align-items: center;
+    flex-direction: column;
+}
+.information-section{
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #6C7C79;
+    padding: 40px;
+    margin-top: 40px;
+}
+.customer-code{
+    margin-top: 20px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.QR-code{
+    margin-top: 20px;
+    text-align: center;
 }
 
 

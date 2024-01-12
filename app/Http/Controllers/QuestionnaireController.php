@@ -76,7 +76,7 @@ class QuestionnaireController extends Controller
             Questionnaire::create([
                 'name' => $request->name,
                 'deceased_id' => null,
-                'expire' => now()->addMinutes(65),
+                'expire' => now()->addMinutes(100),
                 'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
                 'company_id' => Auth::user()->company_id
             ]);
