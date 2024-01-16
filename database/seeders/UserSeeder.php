@@ -19,5 +19,13 @@ class UserSeeder extends Seeder
             'email' => 'test@gmail.com',
             'admin' => 1
         ]);
+
+        User::create([
+            'password' => '$2y$12$Hyi1KiFQCgyUk8Cbe7XgCeFoNrea8sKRo2tOd6iO155hHJu1iPLi6',
+            'name' => 'Jette',
+            'email' => 'jette@gmail.com',
+            'admin' => 0,
+            'company_id' => 1
+        ]);
     }
 }

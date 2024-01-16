@@ -54,6 +54,7 @@ class AnswerController extends Controller
             return redirect()->back()->with('imgError', 'Je moet 1 of meerdere afbeeldingen geselecteerd hebben');   
         }
 
+        //Checkt of alle vragen zijn ingevuld en slaat ze op
         foreach($request->questions as $question_id => $answer){
             if($answer == null){
                 return redirect()->back()->with('questionError', 'Je hebt niet alle vragen ingevuld');   
@@ -77,6 +78,10 @@ class AnswerController extends Controller
 
             $img->storeAs('public/answers', $imgName);
         }
+
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        $questionnaire->completed_times = $questionnaire->completed_times + 1;
+        $questionnaire->save();
     }
 
     /**
@@ -85,7 +90,11 @@ class AnswerController extends Controller
     public function show(string $customercode)
     {
         $questionnaire = Questionnaire::where('customer_code', $customercode)->get()->first();
-        return view('answers.show', compact('questionnaire'));
+        if($questionnaire != null){
+            return view('answers.show', compact('questionnaire'));
+        }else{
+            return view('404');
+        }
     }
 
     /**

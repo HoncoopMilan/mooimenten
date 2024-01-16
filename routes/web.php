@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,24 +34,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/questionnaire/information/{questionnaireName}', [QuestionnaireController::class, 'filledin'])->name('questionnaire.filledin');
-Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::class, 'index'])->name('deceased.questionnaire');
-Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');
-Route::get('/questionnaire/questions/{questionnaireName}', [QuestionController::class, 'index'])->name('questions.questionnaire');
-Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
 
-Route::get('/question', [QuestionController::class, 'questionDashboard'])->name('question.dashboard');
-Route::post('/question/store', [QuestionController::class, 'questionStore'])->name('question.storeQuestion');
-Route::put('/question/update/{question}', [QuestionController::class, 'questionUpdate'])->name('question.update');
-Route::delete('/question/delete/{question}', [QuestionController::class, 'questionDelete'])->name('question.destroy');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/questionnaire/information/{questionnaireName}', [QuestionnaireController::class, 'filledin'])->name('questionnaire.filledin');
+    Route::get('/questionnaire/deceased/{questionnaireName}', [DeceasedController::class, 'index'])->name('deceased.questionnaire');
+    Route::get('/questionnaire/imgDelete/{id}', [DeceasedController::class, 'destroyImg'])->name('deceased.destroyImg');
+    Route::get('/questionnaire/questions/{questionnaireName}', [QuestionController::class, 'index'])->name('questions.questionnaire');
+    Route::get('questionnaire/deceased', [QuestionnaireController::class, 'deceased'])->name('questionnaire.deceased');
+});
+
+Route::middleware(['auth', 'checkadmin'])->group(function () {
+    Route::get('/question', [QuestionController::class, 'questionDashboard'])->name('question.dashboard');
+    Route::post('/question/store', [QuestionController::class, 'questionStore'])->name('question.storeQuestion');
+    Route::put('/question/update/{question}', [QuestionController::class, 'questionUpdate'])->name('question.update');
+    Route::delete('/question/delete/{question}', [QuestionController::class, 'questionDelete'])->name('question.destroy');
+});
 
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
+
+Route::middleware(['auth', 'checkadmin'])->group(function () {
+    Route::get('/companies/{companyName}', [CompanyController::class, 'edit'])->name('companie.edit');
+    Route::resource('companies', CompanyController::class);
+});
 
 Route::post('/answer/check', [AnswerController::class, 'check'])->name('answer.check');
 Route::get('/answer/{customercode}', [AnswerController::class, 'show'])->name('answers.show');
 Route::resource('answer', AnswerController::class);
 Route::get('/questionnaire/{questionnaireName}', [QuestionnaireController::class, 'show'])->name('questionnaire.show');
-Route::resource('questionnaire', QuestionnaireController::class);
+Route::resource('questionnaire', QuestionnaireController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

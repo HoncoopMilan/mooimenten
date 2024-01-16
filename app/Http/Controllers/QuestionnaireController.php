@@ -6,6 +6,7 @@ use App\Models\Answer;
 use App\Models\Photo;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionnaireController extends Controller
 {
@@ -14,13 +15,15 @@ class QuestionnaireController extends Controller
      */
     public function index()
     {
-        $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
-        return view('questionnaire.index', compact('questionnaires'));
-    }
-    public function indexCopy()
-    {
-        $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
-        return view('questionnaire.indexCopy', compact('questionnaires'));
+        if(Auth::user()->admin == 1){
+            $questionnaires = Questionnaire::orderBy('id', 'desc')->get();
+            return view('questionnaire.index', compact('questionnaires'));
+        }else if(Auth::user()->company_id != null){
+            $questionnaires = Questionnaire::where('company_id', Auth::user()->company_id)->orderBy('id', 'desc')->get();
+            return view('questionnaire.index', compact('questionnaires'));
+        }else{
+            return redirect('/');
+        }
     }
 
     /**
@@ -29,7 +32,12 @@ class QuestionnaireController extends Controller
     public function filledin($questionnaireName)
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
-        return view('questionnaire.filledin', compact('questionnaire'));
+
+        if(Auth::user()->admin == 1 || (Auth::user()->company_id == $questionnaire->company_id && Auth::user()->company_id != null)){
+            return view('questionnaire.filledin', compact('questionnaire'));
+        }else{
+            return view('404');
+        }
     }
 
     /**
@@ -64,12 +72,23 @@ class QuestionnaireController extends Controller
 
         $faker = \Faker\Factory::create('nl_NL');
 
-        Questionnaire::create([
-            'name' => $request->name,
-            'deceased_id' => null,
-            'expire' => now()->addMinutes(65),
-            'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}')
-        ]);
+        if(Auth::user()->company_id != null){
+            Questionnaire::create([
+                'name' => $request->name,
+                'deceased_id' => null,
+                'expire' => now()->addMinutes(100),
+                'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
+                'company_id' => Auth::user()->company_id
+            ]);
+        }else{
+            Questionnaire::create([
+                'name' => $request->name,
+                'deceased_id' => null,
+                'expire' => now()->addMinutes(65),
+                'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}')
+            ]);
+        }
+
         
         return redirect()->route('questionnaire.index')->with('succes', 'De vragenlijst is succesvol aangemaakt');   
 
@@ -82,6 +101,7 @@ class QuestionnaireController extends Controller
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->where('expire', '>', now()->addHours(1))->get()->first();
 
+        //Checkt of de vragenlijst al verlopen is
         if ($questionnaire == null) {
             return view('404'); 
         }

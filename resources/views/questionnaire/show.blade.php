@@ -4,8 +4,8 @@
             <li> {{ $error }}</li>
         @endforeach
     @endif
-    <div class="container">
-        <div class="sub-container">
+    <div class="show-container">
+        <div class="show-sub-container">
             <div class="overledene">
                 <img style="width: 150px; height: 150px; object-fit: cover; border-top-left-radius: 5px; border-bottom-left-radius: 5px;" src="{{asset('storage/' . $questionnaire->deceased->img)}}" alt="">
                 <div class="overledene-txt">

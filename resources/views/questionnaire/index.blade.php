@@ -20,12 +20,19 @@
             <div class="section-1">
                 <div class="questionnaire-btn">
                     {{-- Pop up maken: --}}
-                    <a href="javascript:void(0);" onclick="openModal()">Vragenlijst aanmaken</a>
+                    {{-- <a href="javascript:void(0);" onclick="openModal()">Vragenlijst aanmaken</a> --}}
+                    <form class="questionnaireCreateForm" action="{{ route('questionnaire.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf  
+                        <input style="display: none" type="text" name="name" id="">
+                    </form>
+                    <button class="questionnaireCreate" style="margin-left: 5px;">Vragenlijst aanmaken</button>
                 </div>
-                <div class="questionnaire-btn">
-                    {{-- Pop up maken: --}}
-                    <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
-                </div>
+                @if(Auth::user()->admin == 1)
+                    <div class="questionnaire-btn">
+                        {{-- Pop up maken: --}}
+                        <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
+                    </div>
+                @endif
                 <div class="questionnaire-search">
                     <input type="text" id="searchInput" class="search-bar" placeholder="Zoeken...">
                     <button class="search-btn" onclick="search()"></button>
@@ -52,48 +59,56 @@
                     </div>
                 @endforeach
             </div>
-            <form action="{{ route('questionnaire.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf  
-                <input type="text" name="name" id="">
-                <button type="submit">Submit</button> 
-            </form>
         </div>
     </div>
-    <script>
-        // Haal de modal op
-        var modal = document.getElementById('myModal');
-      
-        // Haal de knop op die de modal opent
-        var btn = document.querySelector('.questionnaire-btn a');
-      
-        // Haal het kruisje op om de modal te sluiten
-        var span = document.querySelector('.close');
+    <script>            
+        const questionnaireCreate = document.querySelector('.questionnaireCreate');
+        const questionnaireForm = document.querySelector('.questionnaireCreateForm');
 
-        var questionnaireContainer = document.querySelector('.questionnaire-container');
-      
-        btn.onclick = function() {
-            modal.style.display = 'block';
-            questionnaireContainer.classList.add('dark-background');
-        }
+        questionnaireCreate.addEventListener('click', () => {
+            let questionnaireName = prompt('Naam van de vragenlijst');
+            let nameInput = questionnaireForm.querySelector('input[name="name"]');
+            nameInput.value = questionnaireName;
 
-        span.onclick = function() {
-            modal.style.display = 'none';
-            questionnaireContainer.classList.remove('dark-background');
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-                questionnaireContainer.classList.remove('dark-background');
+            if(questionnaireName != null){
+                questionnaireForm.submit();
             }
-        }
-        function closeModal() {
-            modal.style.display = 'none';
-            questionnaireContainer.classList.remove('dark-background');
-        }
-        function openModal() {
-            modal.style.display = 'block';
-            questionnaireContainer.classList.add('dark-background');
-        }
+        });
+        
+        // // Haal de modal op
+        // var modal = document.getElementById('myModal');
+      
+        // // Haal de knop op die de modal opent
+        // // var btn = document.querySelector('.questionnaire-btn a');
+      
+        // // Haal het kruisje op om de modal te sluiten
+        // var span = document.querySelector('.close');
+
+        // var questionnaireContainer = document.querySelector('.questionnaire-container');
+      
+        // btn.onclick = function() {
+        //     modal.style.display = 'block';
+        //     questionnaireContainer.classList.add('dark-background');
+        // }
+
+        // span.onclick = function() {
+        //     modal.style.display = 'none';
+        //     questionnaireContainer.classList.remove('dark-background');
+        // }
+
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //         modal.style.display = 'none';
+        //         questionnaireContainer.classList.remove('dark-background');
+        //     }
+        // }
+        // function closeModal() {
+        //     modal.style.display = 'none';
+        //     questionnaireContainer.classList.remove('dark-background');
+        // }
+        // function openModal() {
+        //     modal.style.display = 'block';
+        //     questionnaireContainer.classList.add('dark-background');
+        // }
       </script>
 </x-app-layout>
