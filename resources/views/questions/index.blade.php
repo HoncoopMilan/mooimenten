@@ -12,10 +12,11 @@
             </div>
         </form>
     </div>
+    <div class="form-question">
+        <?php $count = 0;?>
         @foreach($questions as $question)
         <?php $count++ ?>
         <div class="form-group" style="display:flex; align-items: center;">
-
             <div class="question">
                 <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.update',$question->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -36,12 +37,8 @@
                     </form>
                 </div>     
                 </div>
-                    
-                 
-                
             </div>
-            
-        </div>
+    </div>
         @endforeach
     </div> 
             <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.update',$question->id) }}" method="POST" enctype="multipart/form-data">
@@ -56,7 +53,6 @@
             </form>
             <button class="submit-{{$count}}" style="margin-left: 5px;">Verwijderen</button>
         </div>
-        @endforeach
         <p id="count" style="display: none">{{$count}}</p>
     </div>
     <script>
