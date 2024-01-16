@@ -33,12 +33,9 @@
                         <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
                     </div>
                 @endif
-                <div class="questionnaire-search">
-                    <input type="text" id="searchInput" class="search-bar" placeholder="Zoeken...">
-                    <button class="search-btn" onclick="search()"></button>
-                </div>
-            </div>
-            
+                
+                @livewire('SearchBarQuestionnaire', ['questionnaires' => $questionnaires])
+            </div>            
             
             @if (\Session::has('error'))
                 <p style="color: red">{!! \Session::get('error') !!}</p>
@@ -111,4 +108,6 @@
         //     questionnaireContainer.classList.add('dark-background');
         // }
       </script>
+
+      @livewireScripts
 </x-app-layout>

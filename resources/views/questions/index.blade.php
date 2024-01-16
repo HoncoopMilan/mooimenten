@@ -1,16 +1,12 @@
 <x-app-layout>
-    <div class="question-info">
-        <h2>Vragen overzicht</h2>
-        <p>Om een vraag aan te maken zet waar de naam van de overledenen %name% neer, zodat de naam daar komt.</p>
-    </div>
     <div class="question-create">
-        <form style="margin: 0px;" action="{{ route('question.storeQuestion') }}" method="POST" enctype="multipart/form-data">
-            @csrf  
-            <input style="width: 600px" type="text" name="question" id="" placeholder="Typ hier uw vraag">
-            <div class="question-btn">
-                <button type="submit">Submit</button> 
-            </div>
-        </form>
+            <form style="margin: 0px" class="questionCreateForm" action="{{ route('question.storeQuestion') }}" method="POST" enctype="multipart/form-data">
+                @csrf  
+                <input style="display: none" type="text" name="question" id="">
+            </form>
+        <div class="questionnaire-btn" style="margin-top: 15px;">
+            <button class="questionCreate" style="margin-left: 5px;">Vraag aanmaken</button>
+        </div>
     </div>
     <div class="form-question">
         <?php $count = 0;?>
@@ -29,34 +25,22 @@
                         <button type="submit">Aanpassen</button> 
                     </div>  
                 </form> 
-                <div class="question-btn">
-                    <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.destroy', $question->id) }}" method="Post">
+                <div class="question-btn" style="margin-top: 3px; margin-bottom: 3px;">
+                    <form class="delete-{{$count}}" action="{{ route('question.destroy', $question->id) }}" method="Post">
                         @csrf
                         @method('DELETE')
-                        <button style="margin-left: 5px;" type="submit">Verwijderen</button>
                     </form>
+                    <button class="submit-{{$count}}" style="margin-right: 25px;" type="submit">Verwijderen</button>
                 </div>     
                 </div>
             </div>
     </div>
+    <p id="count" style="display: none">{{$count}}</p>
         @endforeach
-    </div> 
-            <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.update',$question->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')     
-                <input style="width: 300px;" type="text" name="question" id="" value="{{$question->question}}">
-                <button type="submit">Aanpassen</button> 
-            </form>   
-            <form class="delete-{{$count}}" style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.destroy', $question->id) }}" method="Post">
-                @csrf
-                @method('DELETE')
-            </form>
-            <button class="submit-{{$count}}" style="margin-left: 5px;">Verwijderen</button>
-        </div>
-        <p id="count" style="display: none">{{$count}}</p>
-    </div>
     <script>
         const count = document.querySelector('#count');
+        const questionCreate = document.querySelector('.questionCreate');
+        const questionForm = document.querySelector('.questionCreateForm');
 
         for (let i = 1; i < (Number(count.textContent) + 1); i++) {
             let submit = document.querySelector(`.submit-${i}`);
@@ -65,9 +49,19 @@
             submit.addEventListener('click', () => {
                 let sure = confirm('Als u de vraag verwijderd zal deze ook uit alle bestaande vragenlijsten worden verwijderd');
                 if(sure == true){
-                deleteQuestion.submit();
+                    deleteQuestion.submit();
                 }
             });
         }
+
+        questionCreate.addEventListener('click', () => {
+            let questionName = prompt('Naam van de vraag. Gebruik %name% voor de persoon zijn naam');
+            let questionInput = questionForm.querySelector('input[name="question"]');
+            questionInput.value = questionName;
+
+            if(questionName != null){
+                questionForm.submit();
+            }
+        });
     </script>
 </x-app-layout>
