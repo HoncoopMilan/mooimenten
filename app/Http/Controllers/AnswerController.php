@@ -54,6 +54,15 @@ class AnswerController extends Controller
             return redirect()->back()->with('imgError', 'Je moet 1 of meerdere afbeeldingen geselecteerd hebben');   
         }
 
+        $person = 0;
+
+        $latestAnswer = Answer::where('questionnaire_id', $request->questionnaire_id);
+
+        if(Answer::where('questionnaire_id', $request->questionnaire_id)->first() != null){
+            $latestAnswer = Answer::where('questionnaire_id', $request->questionnaire_id)->latest()->first();
+            $person = $latestAnswer->person + 1;
+        }
+
         //Checkt of alle vragen zijn ingevuld en slaat ze op
         foreach($request->questions as $question_id => $answer){
             if($answer == null){
@@ -64,6 +73,7 @@ class AnswerController extends Controller
                 'answer' => $answer,
                 'questionnaire_id' => $request->questionnaire_id,
                 'question_id' => $question_id,
+                'person' => $person,
             ]);
         }
 

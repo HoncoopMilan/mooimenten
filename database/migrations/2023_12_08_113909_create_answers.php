@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->string('answer');
+            $table->integer('person');
             $table->unsignedBigInteger('questionnaire_id')->nullable();
             $table->foreign('questionnaire_id')->references('id')->on('questionnaires');
             $table->unsignedBigInteger('question_id')->nullable();
