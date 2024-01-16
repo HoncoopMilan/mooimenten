@@ -101,7 +101,9 @@ class AnswerController extends Controller
     {
         $questionnaire = Questionnaire::where('customer_code', $customercode)->get()->first();
         if($questionnaire != null){
-            return view('answers.show', compact('questionnaire'));
+            $person = Answer::Where('questionnaire_id', $questionnaire->id)->latest()->first();
+            $latestPerson = $person->person;
+            return view('answers.show', compact('questionnaire','latestPerson'));
         }else{
             return view('404');
         }
