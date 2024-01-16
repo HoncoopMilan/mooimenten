@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
-    protected $fillable = ['img', 'questionnaire_id'];
+    protected $fillable = ['img', 'questionnaire_id', 'person'];
 
     use HasFactory;
 

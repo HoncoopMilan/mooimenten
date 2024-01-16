@@ -54,6 +54,16 @@ class AnswerController extends Controller
             return redirect()->back()->with('imgError', 'Je moet 1 of meerdere afbeeldingen geselecteerd hebben');   
         }
 
+        $person = 0;
+
+        //Checkt of er al een antwoord is aangemaakt
+        $latestAnswer = Answer::where('questionnaire_id', $request->questionnaire_id);
+
+        if(Answer::where('questionnaire_id', $request->questionnaire_id)->first() != null){
+            $latestAnswer = Answer::where('questionnaire_id', $request->questionnaire_id)->latest()->first();
+            $person = $latestAnswer->person + 1;
+        }
+
         //Checkt of alle vragen zijn ingevuld en slaat ze op
         foreach($request->questions as $question_id => $answer){
             if($answer == null){
@@ -64,6 +74,7 @@ class AnswerController extends Controller
                 'answer' => $answer,
                 'questionnaire_id' => $request->questionnaire_id,
                 'question_id' => $question_id,
+                'person' => $person,
             ]);
         }
 
@@ -73,7 +84,8 @@ class AnswerController extends Controller
 
             Photo::create([
                 'img' => $imgName,
-                'questionnaire_id' => $request->questionnaire_id
+                'questionnaire_id' => $request->questionnaire_id,
+                'person' => $person
             ]);
 
             $img->storeAs('public/answers', $imgName);
@@ -91,7 +103,9 @@ class AnswerController extends Controller
     {
         $questionnaire = Questionnaire::where('customer_code', $customercode)->get()->first();
         if($questionnaire != null){
-            return view('answers.show', compact('questionnaire'));
+            $person = Answer::Where('questionnaire_id', $questionnaire->id)->latest()->first();
+            $latestPerson = $person->person;
+            return view('answers.show', compact('questionnaire','latestPerson'));
         }else{
             return view('404');
         }
