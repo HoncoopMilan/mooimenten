@@ -56,6 +56,7 @@ class AnswerController extends Controller
 
         $person = 0;
 
+        //Checkt of er al een antwoord is aangemaakt
         $latestAnswer = Answer::where('questionnaire_id', $request->questionnaire_id);
 
         if(Answer::where('questionnaire_id', $request->questionnaire_id)->first() != null){
@@ -83,7 +84,8 @@ class AnswerController extends Controller
 
             Photo::create([
                 'img' => $imgName,
-                'questionnaire_id' => $request->questionnaire_id
+                'questionnaire_id' => $request->questionnaire_id,
+                'person' => $person
             ]);
 
             $img->storeAs('public/answers', $imgName);
