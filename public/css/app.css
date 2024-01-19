@@ -426,3 +426,68 @@ header{
     margin-top: 20px;
     text-align: center;
 }
+/* Companies */
+.companies-grid{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.companies{
+    border: 3px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #D1DCD1;
+    padding: 15px;
+    max-width: 300px;
+}
+.company-btn-create{
+    justify-content: center;
+    display:flex;
+    
+   
+}
+
+.comp-create{
+    justify-content: center;
+    display:flex;
+    margin-top: 30px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 250px; /* Adjust the width of the buttons if needed */
+    height: 32px;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+}
+.company-btn{
+    justify-content: center;
+    display:flex;
+    margin-top: 10px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 250px; /* Adjust the width of the buttons if needed */
+    height: 32px;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+}
+.company-name{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+/* Answers */
+.answers-grid{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
