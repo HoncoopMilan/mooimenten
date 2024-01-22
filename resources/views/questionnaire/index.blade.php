@@ -52,6 +52,13 @@
                                 <img style="margin-right: 5px" src="{{ asset('img/document.png')}}" alt="">
                                 <p><strong>{{$questionnaire->completed_times}}x</strong> ingevuld</p>
                             </div>
+                            <div >
+                                <form action="{{ route('questionnaire.destroy', $questionnaire->id) }}" method="Post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="questionnaire-delete-btn" type="submit" onclick="return confirm('Weet u zeker dat je deze vragenlijst wilt verwijderen?');">Verwijderen</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach

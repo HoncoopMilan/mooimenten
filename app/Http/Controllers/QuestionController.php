@@ -96,7 +96,7 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Questionnaire $question)
     {
 
         $questionCount = count($request->all()) - 2;
