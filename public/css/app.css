@@ -537,15 +537,15 @@ header{
 }
 
 /* Answers */
-.answers-grid{
-    display: grid;
-    grid-template-columns: auto auto auto ;
-    gap: 30px;
-    justify-content: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
+.answers-sub-container{
+    width: 986px;
 }
 
+.answers{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
 
 
 /* Media Queries */
