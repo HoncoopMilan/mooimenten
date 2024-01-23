@@ -24,36 +24,6 @@
                 </div>
             </div>
             @else
-
-            {{-- <div class="">
-                <div class="sub">
-                    <div class="information-section">
-                        <div class="succes">
-                            <img style="width: 130px;" src="{{ asset('img/check.png')}}" alt="">
-                            <h1 style="font-size: 20px; color: green; ">Alles is succesvol ingevuld</h1>
-                        </div>
-                        <div class="customer-qr">
-                            <div class="customer-code">
-                                <p>Klanten code: </p>
-                                <p style="font-size: 20px"><strong>{{$questionnaire->customer_code}}</strong></p>
-                                <form action="">
-                                    @csrf
-                                    <div class="email-form">
-                                        <label for="email">Verzenden naar</label>
-                                        <input style="width: 280px;" type="email" name="email" placeholder="gebruiker@gmail.com" required>
-                                    </div>
-                                    
-                                    <button style="background-color: #6C7C79" class="email-send-btn" type="submit">Verzenden</button>
-                                </form>
-                            </div>
-                            <div class="QR-code">
-                                <img style="width: 200px" src="{{ asset('img/qr-code.png')}}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
         <div class="information-section" style="width: 300px;">
             <form action="{{ route('answer.check') }}" method="POST" enctype="multipart/form-data">
                 @csrf  

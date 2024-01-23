@@ -1,26 +1,8 @@
 <x-app-layout>
     <div class="questionnaire-container">
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">
-                    <img class="close-img" src="{{ asset('img/close.png')}}" alt="">
-                </span>
-                <p class="questionnaire-name">Vul de naam van de vragenlijst in</p>
-                <form class="questionnaire-form" id="questionnaireForm" action="{{ route('questionnaire.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-flex">
-                        <input type="text" name="name" id="questionnaireName">
-                        <button style="background-color: #6C7C79" class="questionnaire-make-btn" type="submit">Maken</button> 
-                    </div>  
-                </form>
-            </div>
-        </div>
-          
         <div class="questionnaire-sub-container">
             <div class="section-1">
                 <div class="questionnaire-btn">
-                    {{-- Pop up maken: --}}
-                    {{-- <a href="javascript:void(0);" onclick="openModal()">Vragenlijst aanmaken</a> --}}
                     <form class="questionnaireCreateForm" action="{{ route('questionnaire.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf  
                         <input style="display: none" type="text" name="name" id="">
@@ -29,7 +11,6 @@
                 </div>
                 @if(Auth::user()->admin == 1)
                     <div class="questionnaire-btn">
-                        {{-- Pop up maken: --}}
                         <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
                     </div>
                 @endif
@@ -78,42 +59,6 @@
                 questionnaireForm.submit();
             }
         });
-        
-        // // Haal de modal op
-        // var modal = document.getElementById('myModal');
-      
-        // // Haal de knop op die de modal opent
-        // // var btn = document.querySelector('.questionnaire-btn a');
-      
-        // // Haal het kruisje op om de modal te sluiten
-        // var span = document.querySelector('.close');
-
-        // var questionnaireContainer = document.querySelector('.questionnaire-container');
-      
-        // btn.onclick = function() {
-        //     modal.style.display = 'block';
-        //     questionnaireContainer.classList.add('dark-background');
-        // }
-
-        // span.onclick = function() {
-        //     modal.style.display = 'none';
-        //     questionnaireContainer.classList.remove('dark-background');
-        // }
-
-        // window.onclick = function(event) {
-        //     if (event.target == modal) {
-        //         modal.style.display = 'none';
-        //         questionnaireContainer.classList.remove('dark-background');
-        //     }
-        // }
-        // function closeModal() {
-        //     modal.style.display = 'none';
-        //     questionnaireContainer.classList.remove('dark-background');
-        // }
-        // function openModal() {
-        //     modal.style.display = 'block';
-        //     questionnaireContainer.classList.add('dark-background');
-        // }
       </script>
 
       @livewireScripts
