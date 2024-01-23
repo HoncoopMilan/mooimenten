@@ -38,6 +38,7 @@ header{
 }
 .show-sub-container{
     width: 300px;
+    
 }
 .overledene{
     border: 3px solid #6C7C79;
@@ -45,6 +46,7 @@ header{
     display: flex;
     align-items: center;
     box-shadow: 2px 2px 5px #6C7C79;
+    margin-bottom: 40px;
 }
 .overledene-txt{
     margin-left: 15px;
@@ -100,6 +102,7 @@ header{
     padding: 5px;
     margin-top: 20px;
     font-weight: bold;
+    margin-bottom: 40px;
 }
 
 

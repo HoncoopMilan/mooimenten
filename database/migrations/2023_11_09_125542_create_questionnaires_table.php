@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('deceased_id')->references('id')->on('deceaseds');
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies')->nullable();
-            $table->timestamp('expire');
+            $table->timestamp('expire')->nullable();
             $table->string('customer_code');
             $table->timestamps();
         });

@@ -71,12 +71,13 @@ class QuestionnaireController extends Controller
         ]);
 
         $faker = \Faker\Factory::create('nl_NL');
+        $expireDefault = '2024-01-24';
 
         if(Auth::user()->company_id != null){
             Questionnaire::create([
                 'name' => $request->name,
                 'deceased_id' => null,
-                'expire' => now()->addMinutes(100),
+                'expire' => $expireDefault,
                 'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
                 'company_id' => Auth::user()->company_id
             ]);
@@ -84,7 +85,7 @@ class QuestionnaireController extends Controller
             Questionnaire::create([
                 'name' => $request->name,
                 'deceased_id' => null,
-                'expire' => now()->addMinutes(65),
+                'expire' => $expireDefault,
                 'customer_code' => $faker->regexify('[A-Z]{5}[0-4]{3}')
             ]);
         }

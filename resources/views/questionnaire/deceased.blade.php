@@ -1,10 +1,13 @@
 <x-app-layout>
+    @php
+        $defaultExpire = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', '2024-01-24 16:00:00');
+    @endphp
     <div class="deceased-container">
         <div class="deceased-sub-container">
             <div class="deceased-sub-sub-container">
                 <h1 style="font-size: 20px; margin-bottom: 20px; margin-top: 40px;">Vul hieronder de gegevens in van de overledene</h1>
                 @if( !isset($deceased))
-                    <form class="formproject" action="{{ route('deceased.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="formproject" action="{{ route('deceased.store', ['questionnaireName1' => $questionnaire->name]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-input-questionnaire">
                             <strong>Naam</strong>
@@ -48,6 +51,10 @@
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-input-questionnaire">
+                            <label for="expire">Afsluitdatum</label>
+                            <input type="datetime-local" name="expire" value="" required>
+                        </div>
                         <Strong>Upload hier een foto van de overledene</Strong>
                         <label class="custom-file-upload-deceased">
                             <input name="img" type="file" multiple style="display:none" accept="image/*" onchange="checkImageCount(this)"/>
@@ -57,6 +64,7 @@
                         <div class="deceased-btn">
                             <button type="submit">Volgende</button>
                         </div>
+
                         
                     </form>
                 @else
@@ -104,6 +112,10 @@
                             @error('date_of_death')
                             <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="form-input-questionnaire">
+                            <label for="expire">Afsluitdatum</label>
+                            <input type="datetime-local" name="expire" value="{{$deceased->expire}}" required>
                         </div>
                         @if(isset($deceased->img))
                             <div class="form-input-questionnaire">

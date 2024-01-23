@@ -53,7 +53,7 @@
                         </label>
                     </div>
                     <input type="hidden" name="questionnaire_id" value="{{$questionnaire->id}}" id="">
-                    <button type="submit" class="submit-btn">Verstuur uw herinneringen</button>
+                    <button style="background-color: #6C7C79" type="submit" class="submit-btn">Verstuur uw herinneringen</button>
                 </div>
             </form>
         </div>

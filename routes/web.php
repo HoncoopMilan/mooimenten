@@ -52,6 +52,7 @@ Route::middleware(['auth', 'checkadmin'])->group(function () {
 
 Route::resource('questions', QuestionController::class);
 Route::resource('deceased', DeceasedController::class);
+Route::post('deceased/{questionnaireName1}', [DeceasedController::class, 'store'])->name('deceased.store');
 
 Route::middleware(['auth', 'checkadmin'])->group(function () {
     Route::get('/companies/{companyName}', [CompanyController::class, 'edit'])->name('companie.edit');

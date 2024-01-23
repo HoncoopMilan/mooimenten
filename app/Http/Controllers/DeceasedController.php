@@ -42,7 +42,7 @@ class DeceasedController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $questionnaireName1)
     {
         $request->validate([
             'name' => 'required|min:3',
@@ -51,6 +51,7 @@ class DeceasedController extends Controller
             'adress' => 'required',
             'date_of_birth' => 'required|date',
             'date_of_death' => 'required|date',
+            'expire' => 'required|date',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
@@ -65,14 +66,15 @@ class DeceasedController extends Controller
             'adress' => $request->adress,
             'date_of_birth' => $request->date_of_birth,
             'date_of_death' => $request->date_of_death,
-            'img' => $imgName
+            'img' => $imgName,
         ]);
 
         $request->file('img')
         ->storeAs('public', $imgName);
 
         //Linkt de informatie van de overledenen met de goede vragenlijst
-        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->get()->first();
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        $questionnaire->expire = $request->expire;
         $questionnaire->deceased_id = $deceased->id;
         $questionnaire->save();
 
