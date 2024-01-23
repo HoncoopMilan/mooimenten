@@ -54,7 +54,7 @@
                 </div>
             </div> --}}
 
-        <div class="information-section">
+        <div class="information-section" style="width: 300px;">
             <form action="{{ route('answer.check') }}" method="POST" enctype="multipart/form-data">
                 @csrf  
                 <strong style="font-size: 20px;">Klanten code</strong>
