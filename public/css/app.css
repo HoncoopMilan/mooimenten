@@ -463,7 +463,6 @@ header{
     
    
 }
-
 .comp-create{
     justify-content: center;
     display:flex;
@@ -497,6 +496,30 @@ header{
     font-weight: bolder;
 }
 
+.update{
+    justify-content: center;
+    display:flex;
+    margin-top: 10px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 250px; /* Adjust the width of the buttons if needed */
+    height: 32px;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+}
+.comp-edit{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+.add-users{
+    display: flex;
+    flex-direction: column;
+}
+
 /* Answers */
 .answers-grid{
     display: grid;
@@ -508,15 +531,18 @@ header{
 }
 
 
+
+/* Media Queries */
 @media screen and (max-width: 768px) { 
     .companies-grid{
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto !important;
     }
     .form-question{
         display: grid;
         grid-template-columns: auto;
     }
+
 }
 @media screen and (max-width: 425px) { 
     .companies-grid{
