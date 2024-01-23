@@ -104,7 +104,7 @@ class QuestionnaireController extends Controller
         $questionnaire = Questionnaire::where('name', $questionnaireName)->where('expire', '>', now()->addHours(1))->get()->first();
 
         //Checkt of de vragenlijst al verlopen is & Alles nodige informatie is ingevuld
-        if(!$questionnaire->deceased || !$questionnaire->question || !$questionnaire)
+        if(!$questionnaire || !$questionnaire->deceased || !$questionnaire->questions)
         {
             return view('404'); 
         }
