@@ -449,18 +449,41 @@ header{
     border-radius: 8px;
     box-shadow: 2px 2px 5px #6C7C79;
     padding: 40px;
+    width: 700px;
     margin-top: 40px;
+}
+.customer-qr{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.email-send-btn{
+    margin-top: 20px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #6C7C79;
+    background-color: #6C7C79;
+    color: white;
+    font-weight: bold;
+    width: 150px;
 }
 .customer-code{
     margin-top: 20px;
     display: flex;
     text-align: center;
     flex-direction: column;
+    text-align: left;
 }
 .QR-code{
     margin-top: 20px;
     text-align: center;
 }
+.email-form{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
 /* Companies */
 .companies-grid{
     display: grid;
@@ -578,3 +601,4 @@ header{
         width: 250px !important;
     }
 }
+
