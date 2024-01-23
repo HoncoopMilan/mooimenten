@@ -1,36 +1,38 @@
 <x-app-layout>
     <div class="answers">
-        <div class="answers-sub-container">
             @if($questionnaires != false)
-            <div class="questionnaire-search" style="justify-content: center;">
-                <input style="width: 400px;" type="text" id="searchInput" class="search-bar" placeholder="Zoeken...">
-                <button class="search-btn" onclick="search()"></button>
-            </div>
+            <div class="answers-sub-container">
+                <div class="questionnaire-search" style="justify-content: center;">
+                    <input style="width: 400px;" type="text" id="searchInput" class="search-bar" placeholder="Zoeken...">
+                    <button class="search-btn" onclick="search()"></button>
+                </div>
 
-            <div class="questonnaire-container">
-                    @foreach($questionnaires as $questionnaire)
-                   
-                        <a href="{{route('answer.show', $questionnaire->customer_code)}}">
-                            <div class="questionnaire" style="padding-top: 10px; padding-bottom: 10px;">
-                                <p style="text-align: center;"><strong>{{$questionnaire->name}}</strong></p>
-                                <div class="document" style="justify-content: center; margin-bottom: 0px !important">
-                                    <img style="margin-right: 5px" src="{{ asset('img/document.png')}}" alt="">
-                                    <p><strong>{{$questionnaire->completed_times}}x</strong> ingevuld</p>
+                <div class="questonnaire-container">
+                        @foreach($questionnaires as $questionnaire)
+                    
+                            <a href="{{route('answer.show', $questionnaire->customer_code)}}">
+                                <div class="questionnaire" style="padding-top: 10px; padding-bottom: 10px;">
+                                    <p style="text-align: center;"><strong>{{$questionnaire->name}}</strong></p>
+                                    <div class="document" style="justify-content: center; margin-bottom: 0px !important">
+                                        <img style="margin-right: 5px" src="{{ asset('img/document.png')}}" alt="">
+                                        <p><strong>{{$questionnaire->completed_times}}x</strong> ingevuld</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
 
-                    @endforeach
-            @else
-        </div>
+                        @endforeach
+                </div>
             </div>
+            @else
 
-        <form action="{{ route('answer.check') }}" method="POST" enctype="multipart/form-data">
-            @csrf  
-            <p>Klanten code</p>
-            <input type="text" name="customercode" id="">
-            <button type="submit">Invoeren</button> 
-        </form>
+        <div class="client-code">
+            <form action="{{ route('answer.check') }}" method="POST" enctype="multipart/form-data">
+                @csrf  
+                <p>Klanten code</p>
+                <input type="text" name="customercode" id="">
+                <button type="submit">Invoeren</button> 
+            </form>
+        </div>
         @if (\Session::has('error'))
             <p style="color: red">{!! \Session::get('error') !!}</p>
         @endif
