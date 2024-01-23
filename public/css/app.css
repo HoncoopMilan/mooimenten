@@ -506,3 +506,30 @@ header{
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
+
+@media screen and (max-width: 768px) { 
+    .companies-grid{
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    .form-question{
+        display: grid;
+        grid-template-columns: auto;
+    }
+}
+@media screen and (max-width: 425px) { 
+    .companies-grid{
+        display: grid;
+        grid-template-columns: auto;   
+    }
+    .question {
+        width: 310px !important;
+    }
+    .textfield{
+        width: 250px !important;
+    }
+    .input-question{
+        width: 250px !important;
+    }
+}
