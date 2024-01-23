@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Deceased;
 use App\Models\Photo;
 use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class QuestionnaireController extends Controller
 {
@@ -102,8 +104,9 @@ class QuestionnaireController extends Controller
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->where('expire', '>', now()->addHours(1))->get()->first();
 
-        //Checkt of de vragenlijst al verlopen is
-        if ($questionnaire == null) {
+        //Checkt of de vragenlijst al verlopen is & Alles nodige informatie is ingevuld
+        if(!$questionnaire || !$questionnaire->deceased || !$questionnaire->questions)
+        {
             return view('404'); 
         }
 
@@ -132,6 +135,43 @@ class QuestionnaireController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = Auth::user();
+        $questionnaire = Questionnaire::find($id);
+
+        if($questionnaire->company_id == $user->company_id || $user->admin == 1){
+
+            $questionnaire->deceased_id = null;
+            $questionnaire->company_id = null;
+            $questionnaire->save();
+
+            $deceased = $questionnaire->deceased;
+            if ($deceased != null) {
+                Storage::delete('public/' . $deceased->img);
+                $deceased->delete();
+            }
+
+            $questionnaire->questions()->detach();
+
+            $photos = Photo::where('questionnaire_id', $questionnaire->id)->get();
+            if($photos != null){
+                foreach($photos as $photo){
+                Storage::delete('public/' . $photo->img);
+                $photo->delete();     
+                }
+            }
+
+            $answers = Answer::where('questionnaire_id', $questionnaire->id)->get();
+            if(   $answers !=null){
+                foreach($answers as $answer){
+                    $answer->delete();
+                }
+            }
+
+            $questionnaire->delete();
+            
+            return redirect()->route('questionnaire.index');
+        }else{
+            return view('404'); 
+        }
     }
 }

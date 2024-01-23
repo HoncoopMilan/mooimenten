@@ -37,17 +37,26 @@
                 <form class="formproject" action="{{ route('questions.update',$questionnaire->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    @foreach ($questions as $question)
-                        <div class="form-group" >
-                            <?php $questionQuestion = str_ireplace("%name%", $questionnaire->deceased->name, $question->question) ?>
-                            <input type="checkbox" id="" name="questions[{{$question->id}}]" value="{{$question->id}}" {{ $questionnaire->questions->contains($question) ? 'checked' : '' }}>
-                            <label for="question{{$question->id}}">{{$questionQuestion}}</label>
+                        <div class="question-box">
+                            @foreach ($questions as $question)
+                                <div class="form-group" >
+                                    
+                                        <?php $questionQuestion = str_ireplace("%name%", $questionnaire->deceased->name, $question->question) ?>
+                                        <input type="checkbox" id="" name="questions[{{$question->id}}]" value="{{$question->id}}" {{ $questionnaire->questions->contains($question) ? 'checked' : '' }}>
+                                        <label for="question{{$question->id}}">{{$questionQuestion}}</label>
+                                </div>
+                            @endforeach
                         </div>
-                        @endforeach
 
                     <input type="hidden" name="questionnaire_id" value="{{$questionnaire->id}}">
-                    <button type="submit" name="action" value="previous">Vorige</button>
-                    <button type="submit" name="action" value="next">Volgende</button>
+                    <div class="question-btn-flex">
+                        <div  class="deceased-btn">
+                            <button type="submit" name="action" value="previous">Vorige</button>
+                        </div>
+                        <div class="deceased-btn">
+                            <button type="submit" name="action" value="next">Volgende</button>
+                        </div>
+                    </div>
                 </form>
                 @endif
             </div>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    protected $fillable = ['answer', 'questionnaire_id', 'question_id'];
+    protected $fillable = ['answer', 'questionnaire_id', 'question_id', 'person'];
 
     use HasFactory;
 

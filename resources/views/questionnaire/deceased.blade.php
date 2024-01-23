@@ -57,8 +57,9 @@
                         </div>
                         <Strong>Upload hier een foto van de overledene</Strong>
                         <label class="custom-file-upload-deceased">
-                            <input name="img" type="file" multiple style="display:none" accept="image/*" onchange="checkImageCount(this)"/>
+                            <input name="img" type="file" style="display:none" accept="image/*" onchange="displaySelectedImages(this)"/>
                             <img id="img" src="{{asset('img/add-image.png')}}" alt="">
+                            <div id="image-preview-container"></div>
                         </label>
                         <input type="hidden" name="questionnaire_id" value="{{$questionnaire->id}}">
                         <div class="deceased-btn">
@@ -126,8 +127,9 @@
                         @else
                             <Strong>Upload hier een foto van de overledene</Strong>
                             <label class="custom-file-upload-deceased">
-                                <input name="img" type="file" multiple style="display:none" accept="image/*" onchange="checkImageCount(this)"/>
+                                <input name="img" type="file" style="display:none" accept="image/*" onchange="displaySelectedImages(this)"/>
                                 <img id="img" src="{{asset('img/add-image.png')}}" alt="">
+                                <div id="image-preview-container"></div>
                             </label>
                         @endif
                         <input type="hidden" name="questionnaire_id" value="{{$questionnaire->id}}">
@@ -139,4 +141,34 @@
             </div>
         </div>
     </div>
+    <script>
+        function displaySelectedImages(input) {
+            var previewContainer = document.getElementById('image-preview-container');
+            let previewImageEl = document.getElementById('img');
+    
+            if (input.files && input.files.length > 0) {
+                previewContainer.innerHTML = ''; // Clear previous previews
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+    
+                    reader.onload = function (e) {
+                        var imgElement = document.createElement('img');
+                        imgElement.src = e.target.result;
+                        imgElement.alt = 'Selected Image';
+                        previewImageEl.style.display = 'none';
+                        previewContainer.style.display = 'block';
+                        previewContainer.appendChild(imgElement);
+                    };
+    
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+            if(input.files.length == 0){
+                previewImageEl.style.display = 'block';
+                previewContainer.style.display = 'none';
+                console.log('test');
+            }
+        }
+    </script>
 </x-app-layout>

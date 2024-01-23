@@ -21,11 +21,28 @@ header{
 
 .nav{
     display: flex;
+    width: 70%;
+    margin: 0 auto;
     justify-content: center;
+    align-items: end;
+}
+
+.login-nav{
+    margin-left: 25px;
+    color: black;
+    font-weight: bolder;
 }
 
 .header_logo{
     width: 200px;
+    margin-right: 25px;
+}
+
+.nav-button{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: black;
+    font-weight: bolder;
 }
 
 
@@ -61,6 +78,7 @@ header{
     align-items: center;
     margin-bottom: 4px;
 }
+
 /* form{
     margin-top: 60px;
 }
@@ -249,6 +267,21 @@ header{
     justify-content: center;
 }
 
+.questionnaire-delete-btn{
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79 !important;
+    color: white;
+    width: 200px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 
 
 
@@ -304,6 +337,52 @@ header{
     display: flex;
     
 }
+
+/* questions */
+.question-info{
+    display: inline;
+    align-items: center;
+}
+.question-create{
+    display: flex;
+    justify-content: center;
+}
+.form-question {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+    justify-content: space-around;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.question {
+    border: 3px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #D1DCD1;
+    padding: 15px;
+}
+
+.question-btn {
+    display:flex;
+    gap: 40px;
+    margin-top: 10px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 150px; /* Adjust the width of the buttons if needed */
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+}
+.question-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
 .custom-file-upload-deceased {
     border: 2px solid #6C7C79;
     cursor: pointer;
@@ -382,6 +461,120 @@ header{
     margin-top: 20px;
     text-align: center;
 }
+/* Companies */
+.companies-grid{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.companies{
+    border: 3px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #D1DCD1;
+    padding: 15px;
+    max-width: 300px;
+}
+.company-btn-create{
+    justify-content: center;
+    display:flex;
+    
+   
+}
+.comp-create{
+    justify-content: center;
+    display:flex;
+    margin-top: 30px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 250px; /* Adjust the width of the buttons if needed */
+    height: 32px;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+}
+.company-btn{
+    justify-content: center;
+    display:flex;
+    margin-top: 10px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 250px; /* Adjust the width of the buttons if needed */
+    height: 32px;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+}
+.company-name{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.update{
+    justify-content: center;
+    display:flex;
+    margin-top: 10px;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    color: white;
+    width: 250px; /* Adjust the width of the buttons if needed */
+    height: 32px;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #6C7C79;
+    font-weight: bold;
+}
+.comp-edit{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+.add-users{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Answers */
+.answers-grid{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
 
 
 
+/* Media Queries */
+@media screen and (max-width: 768px) { 
+    .companies-grid{
+        display: grid;
+        grid-template-columns: auto auto !important;
+    }
+    .form-question{
+        display: grid;
+        grid-template-columns: auto;
+    }
+
+}
+@media screen and (max-width: 425px) { 
+    .companies-grid{
+        display: grid;
+        grid-template-columns: auto;   
+    }
+    .question {
+        width: 310px !important;
+    }
+    .textfield{
+        width: 250px !important;
+    }
+    .input-question{
+        width: 250px !important;
+    }
+}

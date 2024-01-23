@@ -1,45 +1,52 @@
 <x-app-layout>
-    <h2>Vragen overzicht</h2>
-    <p>Om een vraag aan te maken zet waar de naam van de overledenen %name% neer, zodat de naam daar komt.</p>
-    <form style="margin: 0px;" action="{{ route('question.storeQuestion') }}" method="POST" enctype="multipart/form-data">
-        @csrf  
-        <input type="text" name="question" id="">
-        <button type="submit">Submit</button> 
-    </form> 
-
-    <div class="form" style="margin-top: 20px;">
-        <?php $count = 0; ?>
-        @foreach($questions as $question)
-        <?php $count++ ?>
-        <div class="form-group" style="display:flex; align-items: center;">
-            <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.update',$question->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')     
-                <input style="width: 300px;" type="text" name="question" id="" value="{{$question->question}}">
-                <button type="submit">Aanpassen</button> 
-            </form>   
-            <form class="delete-{{$count}}" style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.destroy', $question->id) }}" method="Post">
-                @csrf
-                @method('DELETE')
+    <div class="question-create">
+            <form style="margin: 0px" class="questionCreateForm" action="{{ route('question.storeQuestion') }}" method="POST" enctype="multipart/form-data">
+                @csrf  
+                <input style="display: none" type="text" name="question" id="">
             </form>
-            <button class="submit-{{$count}}" style="margin-left: 5px;">Verwijderen</button>
+        <div class="questionnaire-btn" style="margin-top: 15px;">
+            <button class="questionCreate" style="margin-left: 5px;">Vraag aanmaken</button>
         </div>
-        @endforeach
-        <p id="count" style="display: none">{{$count}}</p>
     </div>
+    <div class="form-question" style="padding-bottom: 50px;">
+        @foreach($questions as $question)
+        <div class="form-group" style="display:flex; align-items: center;">
+            <div class="question">
+                <form style="margin-top: 3px; margin-bottom: 3px;" action="{{ route('question.update',$question->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')     
+                    <div class="textfield">
+                        <input style="width: 600px;" class="input-question" type="text" name="question" id="" value="{{$question->question}}">
+                    </div>
+                <div class="question-buttons">
+                    <div class="question-btn">
+                        <button type="submit">Aanpassen</button> 
+                    </div>  
+                </form> 
+                <div class="question-btn" style="margin-top: 3px; margin-bottom: 3px;">
+                    <form action="{{ route('question.destroy', $question->id) }}" method="Post">
+                        @csrf
+                        @method('DELETE')
+                        <button style="margin-right: 25px;" type="submit" onclick="return confirm('Als u de vraag verwijderd zal deze ook uit alle bestaande vragenlijsten worden verwijderd');">Verwijderen</button>
+                    </form>
+                </div>     
+                </div>
+            </div>
+    </div>
+        @endforeach
     <script>
         const count = document.querySelector('#count');
+        const questionCreate = document.querySelector('.questionCreate');
+        const questionForm = document.querySelector('.questionCreateForm');
 
-        for (let i = 1; i < (Number(count.textContent) + 1); i++) {
-            let submit = document.querySelector(`.submit-${i}`);
-            let deleteQuestion = document.querySelector(`.delete-${i}`);
+        questionCreate.addEventListener('click', () => {
+            let questionName = prompt('Naam van de vraag. Gebruik %name% voor de persoon zijn naam');
+            let questionInput = questionForm.querySelector('input[name="question"]');
+            questionInput.value = questionName;
 
-            submit.addEventListener('click', () => {
-                let sure = confirm('Als u de vraag verwijderd zal deze ook uit alle bestaande vragenlijsten worden verwijderd');
-                if(sure == true){
-                deleteQuestion.submit();
-                }
-            });
-        }
+            if(questionName != null){
+                questionForm.submit();
+            }
+        });
     </script>
 </x-app-layout>

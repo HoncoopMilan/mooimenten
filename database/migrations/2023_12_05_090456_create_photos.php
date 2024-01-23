@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('img');
             $table->unsignedBigInteger('questionnaire_id')->nullable();
             $table->foreign('questionnaire_id')->references('id')->on('questionnaires');
+            $table->integer('person');
             $table->timestamps();
         });
     }

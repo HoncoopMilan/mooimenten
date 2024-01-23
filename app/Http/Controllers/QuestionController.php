@@ -80,7 +80,7 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(question $question)
+    public function show(Question $question)
     {
         //
     }
@@ -88,7 +88,7 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(question $question)
+    public function edit(Question $question)
     {
         //
     }
@@ -96,7 +96,7 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, question $question)
+    public function update(Request $request, Questionnaire $question)
     {
 
         $questionCount = count($request->all()) - 2;
@@ -167,7 +167,7 @@ class QuestionController extends Controller
     /**
      * Update a question.
      */
-    public function questionUpdate(Request $request, question $question){
+    public function questionUpdate(Request $request, Question $question){
         $request->validate([
             'question' => 'required',
         ]);
@@ -181,7 +181,7 @@ class QuestionController extends Controller
     /**
      * Delete a question.
      */
-    public function questionDelete(question $question){
+    public function questionDelete(Question $question){
         $answers = Answer::where('question_id', $question->id)->get();
         foreach($answers as $answer){
             $answer->delete();
