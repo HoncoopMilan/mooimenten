@@ -506,3 +506,17 @@ header{
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
+
+@media screen and (max-width: 768px) { 
+    .companies-grid{
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+}
+@media screen and (max-width: 600px) { 
+    .companies-grid{
+        display: grid;
+        grid-template-columns: auto;   
+    }
+}

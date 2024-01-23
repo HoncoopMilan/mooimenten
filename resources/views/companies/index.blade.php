@@ -50,7 +50,7 @@
         const count = document.querySelector('#count');
 
         questionnaireCreate.addEventListener('click', () => {
-            let questionnaireName = prompt('Naam van de vragenlijst');
+            let questionnaireName = prompt('Naam van het bedrijf');
             let nameInput = questionnaireForm.querySelector('input[name="name"]');
             nameInput.value = questionnaireName;
 
