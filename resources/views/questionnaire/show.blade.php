@@ -86,11 +86,18 @@
                         imgElement.src = e.target.result;
                         imgElement.alt = 'Selected Image';
                         previewImageEl.style.display = 'none';
+                        previewContainer.style.display = 'block';
                         previewContainer.appendChild(imgElement);
                     };
     
                     reader.readAsDataURL(input.files[i]);
                 }
+            }
+
+            if(input.files.length == 0){
+                previewImageEl.style.display = 'block';
+                previewContainer.style.display = 'none';
+                console.log('test');
             }
         }
     </script>
