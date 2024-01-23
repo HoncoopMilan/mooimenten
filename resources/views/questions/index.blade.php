@@ -16,7 +16,7 @@
                     @csrf
                     @method('PUT')     
                     <div class="textfield">
-                        <input style="width: 600px;" type="text" name="question" id="" value="{{$question->question}}">
+                        <input style="width: 600px;" class="input-question" type="text" name="question" id="" value="{{$question->question}}">
                     </div>
                 <div class="question-buttons">
                     <div class="question-btn">
