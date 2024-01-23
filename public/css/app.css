@@ -563,15 +563,27 @@ header{
 }
 
 /* Answers */
-.answers-grid{
-    display: grid;
-    grid-template-columns: auto auto auto ;
-    gap: 30px;
-    justify-content: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
+.answers-sub-container{
+    width: 986px;
 }
 
+.answers{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.client-code-btn{
+    color: white;
+    border: 2px solid #6C7C79;
+    border-radius: 8px;
+    background-color: #6C7C79;
+    padding: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 
 /* Media Queries */
