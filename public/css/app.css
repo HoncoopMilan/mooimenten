@@ -21,11 +21,28 @@ header{
 
 .nav{
     display: flex;
+    width: 70%;
+    margin: 0 auto;
     justify-content: center;
+    align-items: end;
+}
+
+.login-nav{
+    margin-left: 25px;
+    color: black;
+    font-weight: bolder;
 }
 
 .header_logo{
     width: 200px;
+    margin-right: 25px;
+}
+
+.nav-button{
+    margin-left: 5px;
+    margin-right: 5px;
+    color: black;
+    font-weight: bolder;
 }
 
 
