@@ -462,7 +462,6 @@ header{
 .companies-grid{
     display: grid;
     grid-template-columns: auto auto auto ;
-    gap: 30px;
     justify-content: center;
     margin-top: 40px;
     margin-bottom: 40px;

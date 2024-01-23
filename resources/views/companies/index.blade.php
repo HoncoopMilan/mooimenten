@@ -19,7 +19,7 @@
     @endif
 
     
-    <div class="companies-grid">
+    <div class="companies-grid" style="@if(count($companies) > 1) gap: 30px @endif">
         <?php $count = 0; ?>
         @foreach($companies as $company)
         <?php $count++ ?>
