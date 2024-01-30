@@ -104,9 +104,14 @@ class AnswerController extends Controller
         $questionnaire = Questionnaire::where('customer_code', $customercode)->get()->first();
         if($questionnaire != null){
             $person = Answer::Where('questionnaire_id', $questionnaire->id)->latest()->first();
-            if(!$person || count($questionnaire->answers) <= 0 || count($questionnaire->photos) <= 0){
-                return redirect()->back()->with('error', 'Er zijn geen antwoorden gegeven');   
+            if(count($questionnaire->answers) <= 0 || count($questionnaire->photos) <= 0){
+                return redirect()->back()->with('error', 'Er zijn geen antwoorden mee gegeven bij deze vragenlijst');   
             }
+
+            if(!$person){
+                return redirect()->back()->with('error', 'Sorry, er is een fout opgetreden');   
+            }
+
             $latestPerson = $person->person;
             return view('answers.show', compact('questionnaire','latestPerson'));
         }else{

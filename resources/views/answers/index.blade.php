@@ -7,6 +7,10 @@
                     <button class="search-btn" onclick="search()"></button>
                 </div>
 
+                @if (\Session::has('error'))
+                    <p style="color: red; text-align: center;">{!! \Session::get('error') !!}</p>
+                 @endif
+
                 <div class="questonnaire-container">
                         @foreach($questionnaires as $questionnaire)
                     
@@ -25,6 +29,9 @@
             </div>
             @else
         <div class="information-section" style="width: 300px;">
+            @if (\Session::has('error'))
+                <p style="color: red; text-align: center;">{!! \Session::get('error') !!}</p>
+            @endif
             <form action="{{ route('answer.check') }}" method="POST" enctype="multipart/form-data">
                 @csrf  
                 <strong style="font-size: 20px;">Klanten code</strong>
@@ -34,9 +41,6 @@
                 </div>
             </form>
         </div>
-        @if (\Session::has('error'))
-            <p style="color: red">{!! \Session::get('error') !!}</p>
-        @endif
     @endif
     </div>
     
