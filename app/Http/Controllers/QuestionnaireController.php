@@ -56,7 +56,7 @@ class QuestionnaireController extends Controller
      */
     public function deceased()
     {
-        return 'test';
+        //
     }
 
     /**
