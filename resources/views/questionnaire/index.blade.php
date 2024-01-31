@@ -14,8 +14,9 @@
                         <a href="{{route('question.dashboard')}}">Vragen bekijken</a>
                     </div>
                 @endif
-                
-                @livewire('SearchBarQuestionnaire', ['questionnaires' => $questionnaires])
+                <form action="">
+                    <input type="search" class="form-control" placeholder="Vind je vragenlijst" name="search" value="{{request('search')}}">
+                </form>
             </div>            
             
             @if (\Session::has('error'))
