@@ -6,6 +6,7 @@ use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionnaireController;
+use App\Models\Company;
 use App\Models\Questionnaire;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,14 @@ Route::middleware(['auth', 'checkadmin'])->group(function () {
     Route::get('/companies/{companyName}', [CompanyController::class, 'edit'])->name('companie.edit');
     Route::resource('companies', CompanyController::class);
 });
+Route::get('companies', function(){
+    if(request('search')){
+        $companies = Company::where('name', 'like', '%' . request('search') . '%')->get();
+    } else{
+        $companies = Company::all();
+    }
+    return view('companies.index', compact('companies'));
+})->middleware('auth')->name('companies.index');
 
 Route::post('/answer/check', [AnswerController::class, 'check'])->name('answer.check');
 Route::get('/answer/{customercode}', [AnswerController::class, 'show'])->name('answers.show');

@@ -8,9 +8,11 @@
             </div>
 
         </form>
-        
-        
+        <form action="">
+            <input type="search" class="form-control" placeholder="Vind je vragenlijst" name="search" value="{{request('search')}}">
+        </form>
     </div>
+    
     
     @if (\Session::has('error'))
     <p style="color: red">{!! \Session::get('error') !!}</p>
