@@ -45,6 +45,15 @@ return [
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
+        'gmail' => [
+            'transport' => 'smtp',
+            'host' => 'smtp.gmail.com',
+            'port' => 465,
+            'encryption' => 'ssl',
+            'username' => env('MAIL_USERNAME_GMAIL'),
+            'password' => env('MAIL_PASSWORD_GMAIL'),
+            'timeout' => null,
+        ],
 
         'ses' => [
             'transport' => 'ses',

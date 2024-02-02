@@ -116,7 +116,7 @@
                         </div>
                         <div class="form-input-questionnaire">
                             <label for="expire">Afsluitdatum</label>
-                            <input type="datetime-local" name="expire" value="{{$deceased->expire}}" required>
+                            <input type="datetime-local" name="expire" value="{{$questionnaire->expire}}" required>
                         </div>
                         @if(isset($deceased->img))
                             <div class="form-input-questionnaire">
