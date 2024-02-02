@@ -3,7 +3,7 @@
             @if($questionnaires != false)
             <div class="answers-sub-container">
                 <div class="questionnaire-search" style="justify-content: center;">
-                    <input style="width: 400px;" type="text" id="searchInput" class="search-bar" placeholder="Zoeken...">
+                    <input style="width: 400px;" type="text" id="searchInput" class="search-bar" placeholder="Zoeken..." >
                     <button class="search-btn" onclick="search()"></button>
                 </div>
 

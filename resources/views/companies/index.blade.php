@@ -8,8 +8,8 @@
             </div>
 
         </form>
-        <form action="">
-            <input type="search" class="form-control" placeholder="Vind je vragenlijst" name="search" value="{{request('search')}}">
+        <form style="display: flex; align-items: flex-end; margin-left: 10px;"action="">
+            <input style="width: 400px;" type="search" id="searchInput" class="search-bar" placeholder="Zoeken..." name="search" value="{{request('search')}}">
         </form>
     </div>
     
