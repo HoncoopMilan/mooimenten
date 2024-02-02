@@ -11,13 +11,13 @@
                         <div class="customer-code">
                             <p>Klanten code: </p>
                             <p style="font-size: 20px"><strong>{{$questionnaire->customer_code}}</strong></p>
-                            <form action="">
+                            <form action="{{ route('mail', $questionnaire->id) }}" method="POST">
                                 @csrf
                                 <div class="email-form">
                                     <label for="email">Verzenden naar</label>
-                                    <input style="width: 280px;" type="email" name="email" placeholder="gebruiker@gmail.com" required>
+                                    <input style="width: 280px;" type="email" name="email" placeholder="Vul hier het emailadres van de klant in" required>
                                 </div>
-                                
+                                <input type="hidden" name="customerCode" value="{{ $questionnaire->customer_code }}">
                                 <button style="background-color: #6C7C79" class="email-send-btn" type="submit">Verzenden</button>
                             </form>
                         </div>

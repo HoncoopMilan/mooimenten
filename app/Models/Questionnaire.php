@@ -26,6 +26,9 @@ class Questionnaire extends Model
     public function answers(){
         return $this->hasMany(Answer::class);
     }
-
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
     
 }
