@@ -94,6 +94,8 @@ class AnswerController extends Controller
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         $questionnaire->completed_times = $questionnaire->completed_times + 1;
         $questionnaire->save();
+
+        return view('questionnaire.thankyou');
     }
 
     /**
