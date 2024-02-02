@@ -1,6 +1,6 @@
 <header>
     <div class="nav">
-        <a href="/"><img class="header_logo" src="{{asset('img/logo.png')}}" alt="logo.png"></a>
+        <img class="header_logo" src="{{asset('img/logo.png')}}" alt="logo.png">
         @if(Auth::check())
             <div class="nav-button">
                 <a href="{{route('questionnaire.index')}}">Vragenlijsten</a>
