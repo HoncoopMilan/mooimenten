@@ -1,0 +1,1 @@
+{"virtualbox":{"/var/www/html/website":{"owner":"root","group":"www-data","guestpath":"/var/www/html/website","hostpath":"C:/laragon/www/mooimenten","disabled":false,"__vagrantfile":true}}}

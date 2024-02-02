@@ -22,7 +22,9 @@
                             </form>
                         </div>
                         <div class="QR-code">
-                            <img style="width: 200px" src="{{ asset('img/qr-code.png')}}" alt="">
+                            <a download="qrcode_{{$questionnaire->name}}" href="data:image/png;base64, {{$qrcode}}">
+                                <img style="width: 200px" src="data:image/png;base64, {{$qrcode}}" alt="">
+                            </a>
                         </div>
                     </div>
                 </div>

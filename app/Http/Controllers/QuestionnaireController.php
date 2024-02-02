@@ -9,6 +9,7 @@ use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QuestionnaireController extends Controller
 {
@@ -35,8 +36,16 @@ class QuestionnaireController extends Controller
     {
         $questionnaire = Questionnaire::where('name', $questionnaireName)->get()->first();
 
+        $url = "questionnaire/" . $questionnaire->name;
+
+        $data = QrCode::size(200)
+        ->format('png')
+        ->generate(url($url));
+
+        $qrcode = base64_encode($data);
+
         if(Auth::user()->admin == 1 || (Auth::user()->company_id == $questionnaire->company_id && Auth::user()->company_id != null)){
-            return view('questionnaire.filledin', compact('questionnaire'));
+            return view('questionnaire.filledin', compact('questionnaire', 'qrcode'));
         }else{
             return view('404');
         }
@@ -47,7 +56,7 @@ class QuestionnaireController extends Controller
      */
     public function deceased()
     {
-        return 'test';
+        //
     }
 
     /**
