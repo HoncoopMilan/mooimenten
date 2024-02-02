@@ -583,6 +583,31 @@ header{
     padding-left: 10px;
     padding-right: 10px;
 }
+.answer-title{
+    display: flex;
+    justify-content: center;
+}
+.answer-h1{
+    font-size: 20px;
+    font-weight: bolder;
+}
+.answers-container{
+    display: flex;
+    justify-content: center;
+    
+}
+.sub-container{
+    display: flex;
+    flex-direction: column;
+}
+.person{
+    border: 3px solid #6C7C79 ;
+    background-color:  #D1DCD1;
+    box-shadow: 2px 2px 5px #6C7C79;
+    margin-bottom: 25px;
+    padding: 20px;
+}
+
 
 
 /* Media Queries */
